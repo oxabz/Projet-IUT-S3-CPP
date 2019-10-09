@@ -1,0 +1,4 @@
+/home/oxabz/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/191.7479.33/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/oxabz/M3105-TP5
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/oxabz/M3105-TP5/cmake-build-debug

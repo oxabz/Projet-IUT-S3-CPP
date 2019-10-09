@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/oxabz/M3105-TP5/Exceptions.h
+exception
+-
+string
+-
+
+/home/oxabz/M3105-TP5/Symbole.cpp
+ctype.h
+-
+stdlib.h
+-
+iostream
+-
+fstream
+-
+Exceptions.h
+/home/oxabz/M3105-TP5/Exceptions.h
+Symbole.h
+/home/oxabz/M3105-TP5/Symbole.h
+
+/home/oxabz/M3105-TP5/Symbole.h
+iostream
+-
+vector
+-
+string
+-
+
