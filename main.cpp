@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
         nomFich = argv[1];
     ifstream fichier(nomFich);
 
-    //try {
+    try {
         if (fichier.fail()) throw FichierException();
         Interpreteur interpreteur(fichier);
         interpreteur.analyse();
@@ -26,8 +26,8 @@ int main(int argc, char* argv[]) {
         if (interpreteur.getArbre() != nullptr) interpreteur.getArbre()->executer();
         // Et on vérifie qu'il a fonctionné en regardant comment il a modifié la table des symboles
         cout << endl << "================ Table des symboles apres exécution : " << interpreteur.getTable();
-    //} catch (InterpreteurException & e) {
-    //    cout << e.what() << endl;
-    //}
+    } catch (InterpreteurException & e) {
+        cout << e.what() << endl;
+    }
     return 0;
 }

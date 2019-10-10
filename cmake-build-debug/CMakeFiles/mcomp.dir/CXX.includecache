@@ -6,25 +6,35 @@
 
 #IncludeRegexTransform: 
 
+/home/oxabz/M3105-TP5/ArbreAbstrait.cpp
+stdlib.h
+-
+ArbreAbstrait.h
+/home/oxabz/M3105-TP5/ArbreAbstrait.h
+Symbole.h
+/home/oxabz/M3105-TP5/Symbole.h
+SymboleValue.h
+/home/oxabz/M3105-TP5/SymboleValue.h
+Exceptions.h
+/home/oxabz/M3105-TP5/Exceptions.h
+
+/home/oxabz/M3105-TP5/ArbreAbstrait.h
+vector
+-
+iostream
+-
+iomanip
+-
+Symbole.h
+/home/oxabz/M3105-TP5/Symbole.h
+Exceptions.h
+/home/oxabz/M3105-TP5/Exceptions.h
+
 /home/oxabz/M3105-TP5/Exceptions.h
 exception
 -
 string
 -
-
-/home/oxabz/M3105-TP5/Symbole.cpp
-ctype.h
--
-stdlib.h
--
-iostream
--
-fstream
--
-Exceptions.h
-/home/oxabz/M3105-TP5/Exceptions.h
-Symbole.h
-/home/oxabz/M3105-TP5/Symbole.h
 
 /home/oxabz/M3105-TP5/Symbole.h
 iostream
@@ -33,4 +43,14 @@ vector
 -
 string
 -
+
+/home/oxabz/M3105-TP5/SymboleValue.h
+string.h
+-
+iostream
+-
+Symbole.h
+/home/oxabz/M3105-TP5/Symbole.h
+ArbreAbstrait.h
+/home/oxabz/M3105-TP5/ArbreAbstrait.h
 

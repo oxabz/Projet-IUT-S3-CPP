@@ -81,4 +81,18 @@ class NoeudInstSi : public Noeud {
     Noeud*  m_sequence;
 };
 
+/////////////////////////////////////////////////////////////////////////////
+class NoeudInstSiRiche : public Noeud {
+public:
+    NoeudInstSiRiche(const vector<Noeud *> &mConditions, const vector<Noeud *> &mSequences);
+    ~NoeudInstSiRiche(){}
+
+    int executer() override;
+
+private:
+    vector<Noeud*> m_conditions;
+    vector<Noeud*> m_sequences;
+
+};
+
 #endif /* ARBREABSTRAIT_H */

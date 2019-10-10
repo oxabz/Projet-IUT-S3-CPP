@@ -79,3 +79,20 @@ int NoeudInstSi::executer() {
   if (m_condition->executer()) m_sequence->executer();
   return 0; // La valeur renvoyée ne représente rien !
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstSiRiche
+////////////////////////////////////////////////////////////////////////////////
+NoeudInstSiRiche::NoeudInstSiRiche(const vector<Noeud *> &mConditions, const vector<Noeud *> &mSequences)
+        : m_conditions(mConditions), m_sequences(mSequences) {}
+
+int NoeudInstSiRiche::executer() {
+    int i = 0;
+    while (i<m_conditions.size()&&!m_conditions[i]->executer()){
+        i++;
+    }
+    if (i<m_conditions.size() || m_conditions.size()+1==m_sequences.size()){
+        m_sequences[i]->executer();
+    }
+    return 0;
+}
