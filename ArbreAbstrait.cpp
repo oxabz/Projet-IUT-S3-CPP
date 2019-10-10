@@ -110,3 +110,19 @@ int NoeudInstTantQue::executer() {
     }
     return 0;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstPour
+////////////////////////////////////////////////////////////////////////////////
+NoeudInstPour::NoeudInstPour(Noeud *mAssignation, Noeud *mIncrementation, Noeud *mCondition, Noeud *mSequence)
+        : m_assignation(mAssignation), m_incrementation(mIncrementation), m_condition(mCondition),
+          m_sequence(mSequence) {}
+
+int NoeudInstPour::executer() {
+    m_assignation->executer();
+    while (m_condition->executer()){
+        m_sequence->executer();
+        m_incrementation->executer();
+    }
+    return 0;
+}

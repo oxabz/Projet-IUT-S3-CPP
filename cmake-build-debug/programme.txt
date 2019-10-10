@@ -12,5 +12,9 @@ procedure principale()
     j=j+1;
     l=l-1;
   fintantque
+  y = 0;
+  pour(z=0;z<10;z=z+1)
+    y=z;
+  finpour
 finproc
 # Commentaire Final
