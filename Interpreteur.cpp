@@ -1,6 +1,7 @@
 #include "Interpreteur.h"
 #include <stdlib.h>
 #include <iostream>
+#include <queue>
 using namespace std;
 
 Interpreteur::Interpreteur(ifstream & fichier) :
@@ -56,7 +57,7 @@ Noeud* Interpreteur::seqInst() {
   NoeudSeqInst* sequence = new NoeudSeqInst();
   do {
     sequence->ajoute(inst());
-  } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si"|| m_lecteur.getSymbole() == "tantque"|| m_lecteur.getSymbole() == "pour");
+  } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si"|| m_lecteur.getSymbole() == "tantque"|| m_lecteur.getSymbole() == "pour"||m_lecteur.getSymbole() == "ecrire");
   // Tant que le symbole courant est un début possible d'instruction...
   // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
   return sequence;
@@ -74,6 +75,8 @@ Noeud* Interpreteur::inst() {
         // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
     }else if (m_lecteur.getSymbole() == "tantque"){
         return instTantQue();
+    }else if (m_lecteur.getSymbole() == "ecrire"){
+        return instEcrire();
     }else if (m_lecteur.getSymbole() == "pour"){
         return instPour();
     }
@@ -192,5 +195,27 @@ Noeud *Interpreteur::instPour() {
     Noeud *sequence = seqInst();
     testerEtAvancer("finpour");
     return new NoeudInstPour(assignation,incrementation,condition,sequence);
+}
+
+Noeud *Interpreteur::instEcrire() {
+    vector<Noeud * > noeuds;
+    testerEtAvancer("ecrire");
+    testerEtAvancer("(");
+    if (m_lecteur.getSymbole()=="<CHAINE>"){
+        noeuds.push_back(m_table.chercheAjoute(m_lecteur.getSymbole()));
+        m_lecteur.avancer();
+    } else
+        noeuds.push_back(expression());
+    while(m_lecteur.getSymbole()==","){
+        testerEtAvancer(",");
+        if (m_lecteur.getSymbole()=="<CHAINE>"){
+            noeuds.push_back(m_table.chercheAjoute(m_lecteur.getSymbole()));
+            m_lecteur.avancer();
+        } else
+            noeuds.push_back(expression());
+    }
+    testerEtAvancer(")");
+    testerEtAvancer(";");
+    return new NoeudInstEcrire(noeuds);
 }
 

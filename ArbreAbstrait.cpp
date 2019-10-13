@@ -126,3 +126,29 @@ int NoeudInstPour::executer() {
     }
     return 0;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstEcrire
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstEcrire::~NoeudInstEcrire() {
+
+}
+
+int NoeudInstEcrire::executer() {
+    for (int i = 0; i < noeuds.size(); ++i) {
+        if  (typeid(*noeuds[i])==typeid(SymboleValue) && *((SymboleValue*)noeuds[i])== "<CHAINE>" ){
+            std::string res = ((SymboleValue*)noeuds[i])->getChaine();
+            cout<<res.substr(1,res.size()-2);
+        }else{
+            cout<<noeuds[i]->executer();
+        }
+    }
+    return 0;
+}
+
+void NoeudInstEcrire::ajoute(Noeud *instruction) {
+    noeuds.push_back(instruction);
+}
+
+NoeudInstEcrire::NoeudInstEcrire(const vector<Noeud *> &noeuds) : noeuds(noeuds) {}

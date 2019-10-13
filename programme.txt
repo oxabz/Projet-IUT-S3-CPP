@@ -16,5 +16,6 @@ procedure principale()
   pour(z=0;z<10;z=z+1)
     y=z;
   finpour
+  ecrire("j=",j);
 finproc
 # Commentaire Final

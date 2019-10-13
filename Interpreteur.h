@@ -37,6 +37,7 @@ private:
     Noeud*  instSiRiche(); // <instSiRiche> ::= si ( <expression> ) <seqInst> finsi
     Noeud*  instTantQue(); //
     Noeud*  instPour();    //
+    Noeud*  instEcrire();    //
 
     // outils pour simplifier l'analyse syntaxique
     void tester (const string & symboleAttendu) const;   // Si symbole courant != symboleAttendu, on lève une exception

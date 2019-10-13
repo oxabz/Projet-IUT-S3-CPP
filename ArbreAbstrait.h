@@ -5,6 +5,7 @@
 //  pour représenter l'arbre abstrait
 
 #include <vector>
+#include <queue>
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -128,6 +129,19 @@ private:
     Noeud*  m_sequence;
 };
 
+/////////////////////////////////////////////////////////////////////////////
+class NoeudInstEcrire : public Noeud {
+public:
+    NoeudInstEcrire(const vector<Noeud *> &noeuds);
 
+    virtual ~NoeudInstEcrire();
+
+    int executer() override;
+
+    void ajoute(Noeud *instruction) override;
+
+private:
+    vector<Noeud*> noeuds;
+};
 
 #endif /* ARBREABSTRAIT_H */
