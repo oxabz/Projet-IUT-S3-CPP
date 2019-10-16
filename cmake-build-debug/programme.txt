@@ -17,5 +17,6 @@ procedure principale()
     y=z;
   finpour
   ecrire("j=",j);
+  lire(j);
 finproc
 # Commentaire Final

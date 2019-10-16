@@ -152,3 +152,16 @@ void NoeudInstEcrire::ajoute(Noeud *instruction) {
 }
 
 NoeudInstEcrire::NoeudInstEcrire(const vector<Noeud *> &noeuds) : noeuds(noeuds) {}
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstLire
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstLire::NoeudInstLire(Noeud *symboleValue) : symboleValue(symboleValue) {}
+
+int NoeudInstLire::executer() {
+    int i;
+    cin>>i;
+    ((SymboleValue*)symboleValue)->setValeur(i);
+    return i;
+}

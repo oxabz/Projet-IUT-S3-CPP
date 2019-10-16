@@ -6,18 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/oxabz/M3105-TP5/ArbreAbstrait.cpp
-stdlib.h
--
-ArbreAbstrait.h
-/home/oxabz/M3105-TP5/ArbreAbstrait.h
-Symbole.h
-/home/oxabz/M3105-TP5/Symbole.h
-SymboleValue.h
-/home/oxabz/M3105-TP5/SymboleValue.h
-Exceptions.h
-/home/oxabz/M3105-TP5/Exceptions.h
-
 /home/oxabz/M3105-TP5/ArbreAbstrait.h
 vector
 -
@@ -38,6 +26,36 @@ exception
 string
 -
 
+/home/oxabz/M3105-TP5/Interpreteur.cpp
+Interpreteur.h
+/home/oxabz/M3105-TP5/Interpreteur.h
+stdlib.h
+-
+iostream
+-
+queue
+-
+
+/home/oxabz/M3105-TP5/Interpreteur.h
+Symbole.h
+/home/oxabz/M3105-TP5/Symbole.h
+Lecteur.h
+/home/oxabz/M3105-TP5/Lecteur.h
+Exceptions.h
+/home/oxabz/M3105-TP5/Exceptions.h
+TableSymboles.h
+/home/oxabz/M3105-TP5/TableSymboles.h
+ArbreAbstrait.h
+/home/oxabz/M3105-TP5/ArbreAbstrait.h
+
+/home/oxabz/M3105-TP5/Lecteur.h
+fstream
+-
+string
+-
+Symbole.h
+/home/oxabz/M3105-TP5/Symbole.h
+
 /home/oxabz/M3105-TP5/Symbole.h
 iostream
 -
@@ -55,4 +73,12 @@ Symbole.h
 /home/oxabz/M3105-TP5/Symbole.h
 ArbreAbstrait.h
 /home/oxabz/M3105-TP5/ArbreAbstrait.h
+
+/home/oxabz/M3105-TP5/TableSymboles.h
+SymboleValue.h
+/home/oxabz/M3105-TP5/SymboleValue.h
+vector
+-
+iostream
+-
 

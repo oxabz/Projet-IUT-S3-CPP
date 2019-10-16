@@ -144,4 +144,14 @@ private:
     vector<Noeud*> noeuds;
 };
 
+/////////////////////////////////////////////////////////////////////////////
+class NoeudInstLire : public Noeud{
+public:
+    NoeudInstLire(Noeud *symboleValue);
+
+    int executer() override;
+
+private:
+    Noeud * symboleValue;
+};
 #endif /* ARBREABSTRAIT_H */
