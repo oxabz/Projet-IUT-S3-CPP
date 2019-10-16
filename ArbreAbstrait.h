@@ -154,4 +154,15 @@ public:
 private:
     Noeud * symboleValue;
 };
+/////////////////////////////////////////////////////////////////////////////
+class NoeudInstRepeter : public Noeud{
+public:
+    NoeudInstRepeter(Noeud *exp, Noeud *inst);
+
+    int executer() override;
+
+private:
+    Noeud * exp;
+    Noeud * inst;
+};
 #endif /* ARBREABSTRAIT_H */

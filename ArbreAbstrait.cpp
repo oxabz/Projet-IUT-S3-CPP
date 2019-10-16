@@ -165,3 +165,16 @@ int NoeudInstLire::executer() {
     ((SymboleValue*)symboleValue)->setValeur(i);
     return i;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstLire
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstRepeter::NoeudInstRepeter(Noeud *exp, Noeud *inst) : exp(exp), inst(inst) {}
+
+int NoeudInstRepeter::executer() {
+    do{
+        inst->executer();
+    }while (!exp->executer());
+    return 0;
+}

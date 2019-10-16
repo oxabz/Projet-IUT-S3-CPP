@@ -33,9 +33,10 @@ private:
     Noeud*  expression();  //  <expression> ::= <facteur> { <opBinaire> <facteur> }
     Noeud*  facteur();     //     <facteur> ::= <entier>  |  <variable>  |  - <facteur>  | non <facteur> | ( <expression> )
                            //   <opBinaire> ::= + | - | *  | / | < | > | <= | >= | == | != | et | ou
-    Noeud*  instSi();      //      <instSi> ::= si ( <expression> ) <seqInst> finsi
+    Noeud*  instSi();      // DEPRECATED     <instSi> ::= si ( <expression> ) <seqInst> finsi
     Noeud*  instSiRiche(); // <instSiRiche> ::= si ( <expression> ) <seqInst> finsi
     Noeud*  instTantQue(); //
+    Noeud*  instRepeter(); //
     Noeud*  instPour();    //
     Noeud*  instEcrire();    //
     Noeud*  instLire();    //
