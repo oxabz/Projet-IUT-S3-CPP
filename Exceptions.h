@@ -9,6 +9,7 @@
 #define	EXCEPTIONS_H
 #include <exception>
 #include <string>
+#include "Symbole.h"
 using namespace std;
 
 // Classe mère de toutes les exceptions de l'interpréteur
@@ -28,12 +29,18 @@ public:
 
 class SyntaxeException : public InterpreteurException {
 public:
-    SyntaxeException(const char * message = NULL) : m_message(message) {}
+    SyntaxeException(const char * message = NULL, Symbole* s = nullptr) : m_message(message), symbole(s) {}
     const char * what() const throw() override {
         return m_message;
     }
+
+    Symbole *getSymbole() const {
+        return symbole;
+    }
+
 private :
     const char* m_message;
+    Symbole *symbole;
 };
 
 

@@ -26,8 +26,17 @@ void Interpreteur::tester(const string & symboleAttendu) const {
 
 void Interpreteur::testerEtAvancer(const string & symboleAttendu) {
   // Teste si le symbole courant est égal au symboleAttendu... Si oui, avance, Sinon, lève une exception
-  tester(symboleAttendu);
-  m_lecteur.avancer();
+    try {
+        tester(symboleAttendu);
+        m_lecteur.avancer();
+    }catch (SyntaxeException &e){
+        Symbole * symboleThrow = new Symbole(m_lecteur.getSymbole());
+        m_lecteur.avancer();
+        if(m_lecteur.getSymbole()!=symboleAttendu){
+            throw SyntaxeException(e.what(), symboleThrow);
+        }
+    }
+
 }
 
 void Interpreteur::erreur(const string & message) const {
@@ -157,6 +166,7 @@ Noeud *Interpreteur::instSiRiche() {
     vector<Noeud * > conditions;
     vector<Noeud * > sequences;
     testerEtAvancer("si");
+
     testerEtAvancer("(");
     conditions.push_back(expression());
     testerEtAvancer(")");
@@ -178,27 +188,80 @@ Noeud *Interpreteur::instSiRiche() {
 }
 
 Noeud *Interpreteur::instTantQue() {
-    testerEtAvancer("tantque");
-    testerEtAvancer("(");
-    Noeud *condition = expression();
-    testerEtAvancer(")");
-    Noeud *sequence = seqInst();
-    testerEtAvancer("fintantque");
-    return new NoeudInstTantQue(condition, sequence);
+    Noeud *condition;
+    Noeud *sequence;
+    int restartPoint = -1;
+    restart:
+    try {
+        switch (restartPoint){
+            default:
+                testerEtAvancer("tantque");
+                testerEtAvancer("(");
+                condition = expression();
+            case 0:
+                testerEtAvancer(")");
+                sequence = seqInst();
+            case 1:
+                testerEtAvancer("fintantque");
+        }
+        return new NoeudInstTantQue(condition, sequence);
+    }catch(SyntaxeException &e) {
+        string fallback_symbole[] = {")","fintantque"};
+
+        while (m_lecteur.getSymbole()!=";"){
+            restartPoint = 0;
+            while(restartPoint<2&&m_lecteur.getSymbole()!=fallback_symbole[restartPoint]){
+                restartPoint++;
+            }
+            if(restartPoint<2){
+                goto restart;
+            }else{
+                m_lecteur.avancer();
+            }
+        }
+        throw e;
+    }
+
 }
 
 Noeud *Interpreteur::instPour() {
-    testerEtAvancer("pour");
-    testerEtAvancer("(");
-    Noeud *assignation = affectation();
-    testerEtAvancer(";");
-    Noeud *condition = expression();
-    testerEtAvancer(";");
-    Noeud *incrementation = affectation();
-    testerEtAvancer(")");
-    Noeud *sequence = seqInst();
-    testerEtAvancer("finpour");
-    return new NoeudInstPour(assignation,incrementation,condition,sequence);
+    Noeud *assignation;
+    Noeud *condition;
+    Noeud *incrementation;
+    Noeud *sequence;
+
+
+    int restartPoint = -1;
+    try{
+        switch (restartPoint){
+            testerEtAvancer("pour");
+            testerEtAvancer("(");
+            assignation = affectation();
+            testerEtAvancer(";");
+            condition = expression();
+            testerEtAvancer(";");
+            incrementation = affectation();
+            testerEtAvancer(")");
+            sequence = seqInst();
+            testerEtAvancer("finpour");
+            return new NoeudInstPour(assignation,incrementation,condition,sequence);
+        }
+    }catch(SyntaxeException &e) {
+        string fallback_symbole[] = {")","fintantque"};
+
+        while (m_lecteur.getSymbole()!=";"){
+            restartPoint = 0;
+            while(restartPoint<2&&m_lecteur.getSymbole()!=fallback_symbole[restartPoint]){
+                restartPoint++;
+            }
+            if(restartPoint<2){
+                goto restart;
+            }else{
+                m_lecteur.avancer();
+            }
+        }
+        throw e;
+    }
 }
 
 Noeud *Interpreteur::instEcrire() {
