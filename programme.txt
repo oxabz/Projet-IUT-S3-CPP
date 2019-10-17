@@ -8,8 +8,8 @@ procedure principale()
     j=2;
   finsi
   l=4;
-  tantque (l>5
-    j=j+1;
+  tantque l>5)
+    j=j+1
     l=l-1;
   fintantque
   y = -9;

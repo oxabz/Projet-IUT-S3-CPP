@@ -229,22 +229,22 @@ Noeud *Interpreteur::instPour() {
     Noeud *condition;
     Noeud *incrementation;
     Noeud *sequence;
-
-
+    testerEtAvancer("pour");
+    testerEtAvancer("(");
+    assignation = affectation();
+    testerEtAvancer(";");
+    condition = expression();
+    testerEtAvancer(";");
+    incrementation = affectation();
+    testerEtAvancer(")");
+    sequence = seqInst();
+    testerEtAvancer("finpour");
+    return new NoeudInstPour(assignation,incrementation,condition,sequence);
+    restart :
     int restartPoint = -1;
     try{
         switch (restartPoint){
-            testerEtAvancer("pour");
-            testerEtAvancer("(");
-            assignation = affectation();
-            testerEtAvancer(";");
-            condition = expression();
-            testerEtAvancer(";");
-            incrementation = affectation();
-            testerEtAvancer(")");
-            sequence = seqInst();
-            testerEtAvancer("finpour");
-            return new NoeudInstPour(assignation,incrementation,condition,sequence);
+
         }
     }catch(SyntaxeException &e) {
         string fallback_symbole[] = {")","fintantque"};
