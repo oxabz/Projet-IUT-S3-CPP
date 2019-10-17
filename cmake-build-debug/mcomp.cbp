@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="mcomp"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mcomp">
+				<Option output="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/mcomp" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 mcomp"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mcomp/fast">
+				<Option output="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/mcomp" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 mcomp/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/ArbreAbstrait.cpp">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/ArbreAbstrait.h">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Exceptions.h">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Interpreteur.cpp">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Interpreteur.h">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Lecteur.cpp">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Lecteur.h">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Symbole.cpp">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Symbole.h">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/SymboleValue.cpp">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/SymboleValue.h">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/TableSymboles.cpp">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/TableSymboles.h">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/main.cpp">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
