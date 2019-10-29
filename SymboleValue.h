@@ -8,13 +8,16 @@ using namespace std;
 #include "Symbole.h"
 #include "ArbreAbstrait.h"
 
-class SymboleValue : public Symbole,  // Un symbole valué est un symbole qui a une valeur (définie ou pas)
-                     public Noeud  {  //  et c'est aussi une feuille de l'arbre abstrait
+class Generateur;
+
+class SymboleValue : public Symbole, public Noeud{
 public:
 	  SymboleValue(const Symbole & s); // Construit un symbole valué à partir d'un symbole existant s
 	  ~SymboleValue( ) {}
 	  int  executer() override;        // exécute le SymboleValue (revoie sa valeur !)
-	  inline void setValeur(int valeur)    { this->m_valeur=valeur; m_defini=true;  } // accesseur
+    void traduire(Generateur *os) override;
+
+    inline void setValeur(int valeur)    { this->m_valeur=valeur; m_defini=true;  } // accesseur
 	  inline bool estDefini()              { return m_defini;                       } // accesseur
 
 	  friend ostream & operator << (ostream & cout, const SymboleValue & symbole); // affiche un symbole value sur cout

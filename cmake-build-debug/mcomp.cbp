@@ -91,6 +91,12 @@
 		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Exceptions.h">
 			<Option target="mcomp"/>
 		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Generateur.cpp">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Generateur.h">
+			<Option target="mcomp"/>
+		</Unit>
 		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Interpreteur.cpp">
 			<Option target="mcomp"/>
 		</Unit>
@@ -122,6 +128,12 @@
 			<Option target="mcomp"/>
 		</Unit>
 		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/main.cpp">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/testProgrammes/TesterEcrire.cpp">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/testProgrammes/TesterEcrire.h">
 			<Option target="mcomp"/>
 		</Unit>
 		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/CMakeLists.txt">

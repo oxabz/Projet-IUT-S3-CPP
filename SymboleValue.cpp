@@ -2,6 +2,7 @@
 #include "Exceptions.h"
 #include <stdlib.h>
 
+#include "Generateur.h"
 SymboleValue::SymboleValue(const Symbole & s) :
 Symbole(s.getChaine()) {
   if (s == "<ENTIER>") {
@@ -22,4 +23,8 @@ ostream & operator<<(ostream & cout, const SymboleValue & symbole) {
   if (symbole.m_defini) cout << symbole.m_valeur << " ";
   else cout << "indefinie ";
   return cout;
+}
+
+void SymboleValue::traduire(Generateur *os) {
+    os->ecrire(getChaine());
 }

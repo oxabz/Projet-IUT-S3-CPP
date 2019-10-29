@@ -150,6 +150,33 @@ ArbreAbstrait.cpp.s:
 	$(MAKE) -f CMakeFiles/mcomp.dir/build.make CMakeFiles/mcomp.dir/ArbreAbstrait.cpp.s
 .PHONY : ArbreAbstrait.cpp.s
 
+Generateur.o: Generateur.cpp.o
+
+.PHONY : Generateur.o
+
+# target to build an object file
+Generateur.cpp.o:
+	$(MAKE) -f CMakeFiles/mcomp.dir/build.make CMakeFiles/mcomp.dir/Generateur.cpp.o
+.PHONY : Generateur.cpp.o
+
+Generateur.i: Generateur.cpp.i
+
+.PHONY : Generateur.i
+
+# target to preprocess a source file
+Generateur.cpp.i:
+	$(MAKE) -f CMakeFiles/mcomp.dir/build.make CMakeFiles/mcomp.dir/Generateur.cpp.i
+.PHONY : Generateur.cpp.i
+
+Generateur.s: Generateur.cpp.s
+
+.PHONY : Generateur.s
+
+# target to generate assembly for a file
+Generateur.cpp.s:
+	$(MAKE) -f CMakeFiles/mcomp.dir/build.make CMakeFiles/mcomp.dir/Generateur.cpp.s
+.PHONY : Generateur.cpp.s
+
 Interpreteur.o: Interpreteur.cpp.o
 
 .PHONY : Interpreteur.o
@@ -312,6 +339,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/mcomp.dir/build.make CMakeFiles/mcomp.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+testProgrammes/TesterEcrire.o: testProgrammes/TesterEcrire.cpp.o
+
+.PHONY : testProgrammes/TesterEcrire.o
+
+# target to build an object file
+testProgrammes/TesterEcrire.cpp.o:
+	$(MAKE) -f CMakeFiles/mcomp.dir/build.make CMakeFiles/mcomp.dir/testProgrammes/TesterEcrire.cpp.o
+.PHONY : testProgrammes/TesterEcrire.cpp.o
+
+testProgrammes/TesterEcrire.i: testProgrammes/TesterEcrire.cpp.i
+
+.PHONY : testProgrammes/TesterEcrire.i
+
+# target to preprocess a source file
+testProgrammes/TesterEcrire.cpp.i:
+	$(MAKE) -f CMakeFiles/mcomp.dir/build.make CMakeFiles/mcomp.dir/testProgrammes/TesterEcrire.cpp.i
+.PHONY : testProgrammes/TesterEcrire.cpp.i
+
+testProgrammes/TesterEcrire.s: testProgrammes/TesterEcrire.cpp.s
+
+.PHONY : testProgrammes/TesterEcrire.s
+
+# target to generate assembly for a file
+testProgrammes/TesterEcrire.cpp.s:
+	$(MAKE) -f CMakeFiles/mcomp.dir/build.make CMakeFiles/mcomp.dir/testProgrammes/TesterEcrire.cpp.s
+.PHONY : testProgrammes/TesterEcrire.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -324,6 +378,9 @@ help:
 	@echo "... ArbreAbstrait.o"
 	@echo "... ArbreAbstrait.i"
 	@echo "... ArbreAbstrait.s"
+	@echo "... Generateur.o"
+	@echo "... Generateur.i"
+	@echo "... Generateur.s"
 	@echo "... Interpreteur.o"
 	@echo "... Interpreteur.i"
 	@echo "... Interpreteur.s"
@@ -342,6 +399,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... testProgrammes/TesterEcrire.o"
+	@echo "... testProgrammes/TesterEcrire.i"
+	@echo "... testProgrammes/TesterEcrire.s"
 .PHONY : help
 
 

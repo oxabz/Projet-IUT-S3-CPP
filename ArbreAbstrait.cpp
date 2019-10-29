@@ -4,6 +4,7 @@
 #include "SymboleValue.h"
 #include "Exceptions.h"
 
+#include "Generateur.h"
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudSeqInst
 ////////////////////////////////////////////////////////////////////////////////
@@ -21,6 +22,30 @@ void NoeudSeqInst::ajoute(Noeud* instruction) {
   if (instruction!=nullptr) m_instructions.push_back(instruction);
 }
 
+void NoeudSeqInst::traduire(Generateur *os) {
+    os->ecrire("{");
+    os->incNiveau();
+    for (int i = 0; i < this->m_instructions.size(); ++i) {
+        m_instructions[i]->traduire(os);
+    }
+    os->decNiveau();
+    os->ecrireLigne("}");
+}
+
+int NoeudSeqInst::length() {
+    return m_instructions.size();
+}
+
+Noeud *NoeudSeqInst::operator[](int i) {
+    return m_instructions[i];
+}
+
+Noeud *NoeudSeqInst::getInst(int i) {
+    return m_instructions[i];
+}
+
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudAffectation
 ////////////////////////////////////////////////////////////////////////////////
@@ -33,6 +58,20 @@ int NoeudAffectation::executer() {
   int valeur = m_expression->executer(); // On exécute (évalue) l'expression
   ((SymboleValue*) m_variable)->setValeur(valeur); // On affecte la variable
   return 0; // La valeur renvoyée ne représente rien !
+}
+
+void NoeudAffectation::traduire(Generateur *os) {
+    os->ecrireLigne("");
+    this->m_variable->traduire(os);
+    os->ecrire(" = ");
+    this->m_expression->traduire(os);
+    os->ecrire(";");
+}
+
+void NoeudAffectation::traduireInline(Generateur *os) {
+    this->m_variable->traduire(os);
+    os->ecrire(" = ");
+    this->m_expression->traduire(os);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -67,6 +106,14 @@ int NoeudOperateurBinaire::executer() {
   return valeur; // On retourne la valeur calculée
 }
 
+void NoeudOperateurBinaire::traduire(Generateur *os) {
+    os->ecrire("(");
+    m_operandeGauche->traduire(os);
+    os->ecrire(m_operateur.getChaine());
+    m_operandeDroit->traduire(os);
+    os->ecrire(")");
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstSi
 ////////////////////////////////////////////////////////////////////////////////
@@ -78,6 +125,11 @@ NoeudInstSi::NoeudInstSi(Noeud* condition, Noeud* sequence)
 int NoeudInstSi::executer() {
   if (m_condition->executer()) m_sequence->executer();
   return 0; // La valeur renvoyée ne représente rien !
+}
+
+void NoeudInstSi::traduire(Generateur *os) {
+
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -97,6 +149,40 @@ int NoeudInstSiRiche::executer() {
     return 0;
 }
 
+void NoeudInstSiRiche::traduire(Generateur *os) {
+    os->ecrireLigne("if");
+    this->m_conditions[0]->traduire(os);
+    if(typeid(*m_sequences[0])== typeid(NoeudSeqInst)){
+        m_sequences[0]->traduire(os);
+    }else{
+        os->incNiveau();
+        m_sequences[0]->traduire(os);
+        os->decNiveau();
+    }
+    for (int i = 1; i < this->m_conditions.size(); ++i) {
+        os->ecrire("else if");
+        this->m_conditions[i]->traduire(os);
+        if(typeid(*m_sequences[i])== typeid(NoeudSeqInst)){
+            m_sequences[i]->traduire(os);
+        }else{
+            os->incNiveau();
+            m_sequences[i]->traduire(os);
+            os->decNiveau();
+        }
+    }
+    if(m_conditions.size()+1==m_sequences.size()) {
+        os->ecrireLigne("else");
+        if(typeid(*m_sequences[m_sequences.size()-1])== typeid(NoeudSeqInst)){
+            m_sequences[m_sequences.size()-1]->traduire(os);
+        }else{
+            os->incNiveau();
+            m_sequences[m_sequences.size()-1]->traduire(os);
+            os->decNiveau();
+        }
+    }
+
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstTantQue
 ////////////////////////////////////////////////////////////////////////////////
@@ -109,6 +195,18 @@ int NoeudInstTantQue::executer() {
         m_sequence->executer();
     }
     return 0;
+}
+
+void NoeudInstTantQue::traduire(Generateur *os) {
+    os->ecrireLigne("while");
+    m_condition->traduire(os);
+    if(typeid(*m_sequence)== typeid(NoeudSeqInst)){
+        m_sequence->traduire(os);
+    }else{
+        os->incNiveau();
+        m_sequence->traduire(os);
+        os->decNiveau();
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -125,6 +223,23 @@ int NoeudInstPour::executer() {
         m_incrementation->executer();
     }
     return 0;
+}
+
+void NoeudInstPour::traduire(Generateur *os) {
+    os->ecrireLigne("for(");
+    ((NoeudAffectation*)this->m_assignation)->traduireInline(os);
+    os->ecrire("; ");
+    this->m_condition->traduire(os);
+    os->ecrire("; ");
+    ((NoeudAffectation*)this->m_incrementation)->traduireInline(os);
+    os->ecrire(")");
+    if(typeid(*m_sequence)== typeid(NoeudSeqInst)){
+        m_sequence->traduire(os);
+    }else{
+        os->incNiveau();
+        m_sequence->traduire(os);
+        os->decNiveau();
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -153,6 +268,15 @@ void NoeudInstEcrire::ajoute(Noeud *instruction) {
 
 NoeudInstEcrire::NoeudInstEcrire(const vector<Noeud *> &noeuds) : noeuds(noeuds) {}
 
+void NoeudInstEcrire::traduire(Generateur *os) {
+    os->ecrireLigne ("std::cout");
+    for(Noeud * noeud : this->noeuds){
+        os->ecrire("<<");
+        noeud->traduire(os);
+    }
+    os->ecrire(";");
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstLire
 ////////////////////////////////////////////////////////////////////////////////
@@ -165,3 +289,32 @@ int NoeudInstLire::executer() {
     ((SymboleValue*)symboleValue)->setValeur(i);
     return i;
 }
+
+void NoeudInstLire::traduire(Generateur *os) {
+    os->ecrireLigne("std::cin>>");
+    this->symboleValue->traduire(os);
+    os->ecrire(";");
+}
+
+////////////////////////////////////////////////////////////////////////////>
+// NoeudInstRepeter
+////////////////////////////////////////////////////////////////////////////>
+
+NoeudInstRepeter::NoeudInstRepeter(Noeud *exp, Noeud *inst) : exp(exp), inst(inst){}
+
+int NoeudInstRepeter::executer() {
+    do{
+        inst->executer();
+    }while (!exp->executer());
+    return 0;
+}
+
+void NoeudInstRepeter::traduire(Generateur *os) {
+    os->ecrireLigne("do");
+    this->inst->traduire(os);
+    os->ecrire("while");
+    this->exp->traduire(os);
+    os->ecrire(";");
+
+}
+

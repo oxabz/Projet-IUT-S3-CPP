@@ -4,12 +4,34 @@
 #include <queue>
 using namespace std;
 
-Interpreteur::Interpreteur(ifstream & fichier) :
-m_lecteur(fichier), m_table(), m_arbre(nullptr) {
+Interpreteur::Interpreteur(ifstream & fichier, ostream &fsortie) :
+m_lecteur(fichier), m_table(), m_arbre(nullptr), m_generateur(fsortie) {
 }
 
 void Interpreteur::analyse() {
   m_arbre = programme(); // on lance l'analyse de la première règle
+}
+
+void Interpreteur::startTranspilation() {
+    m_generateur.ecrire("#include <iostream>\n#include <string>\nint main()\n{");
+    m_generateur.incNiveau();
+    m_generateur.ecrireLigne("int ");
+    for (int i = 0; i < m_table.getTaille(); ++i) {
+        if(m_table[i]=="<VARIABLE>"){
+            m_generateur.ecrire(m_table[i].getChaine());
+            if (i < m_table.getTaille()-1){
+                m_generateur.ecrire(",");
+            }
+        }
+    }
+    m_generateur.ecrire(";");
+    for (int j = 0; j < ((NoeudSeqInst*)getArbre())->length(); ++j) {
+        ((NoeudSeqInst*)getArbre())->getInst(j)->traduire(&this->m_generateur);
+    }
+
+    m_generateur.ecrireLigne("return 0;");
+    m_generateur.decNiveau();
+    m_generateur.ecrireLigne("}");
 }
 
 void Interpreteur::tester(const string & symboleAttendu) const {
@@ -229,5 +251,21 @@ Noeud *Interpreteur::instLire() {
     testerEtAvancer(")");
     testerEtAvancer(";");
     return new NoeudInstLire(var);
+}
+
+Noeud *Interpreteur::instRepeter() {
+    testerEtAvancer("repeter");
+    Noeud * sesquInst = seqInst();
+    testerEtAvancer("jusqua");
+    testerEtAvancer("(");
+    Noeud * exp = expression();
+    testerEtAvancer(")");
+    testerEtAvancer(";");
+    return new NoeudInstRepeter(exp,sesquInst);
+}
+
+
+Generateur &Interpreteur::getGenerateur() {
+    return m_generateur;
 }
 

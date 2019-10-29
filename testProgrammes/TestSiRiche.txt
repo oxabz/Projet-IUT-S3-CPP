@@ -1,0 +1,26 @@
+# Test du si riche
+# Résultat attendu :
+# test1 = 1
+# test2 = 1
+# test3 = 1
+procedure principale()
+ test1 = 0 ;
+ si ( 1 )
+    test1 = 1 ;
+ finsi
+ si ( 0 )
+    test2 = 0 ;
+ sinon
+    test = 1
+ finsi ;
+ test3 = 0
+ si (0)
+    test3 = 0;
+ sinonsi (1)
+    test3 = 1;
+ sinon
+    test3=0;
+ finsi
+
+
+finproc

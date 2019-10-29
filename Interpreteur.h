@@ -6,12 +6,15 @@
 #include "Exceptions.h"
 #include "TableSymboles.h"
 #include "ArbreAbstrait.h"
+#include "Generateur.h"
 
 class Interpreteur {
 public:
-	Interpreteur(ifstream & fichier);   // Construit un interpréteur pour interpreter
+	Interpreteur(ifstream & fichier, ostream &fsortie);   // Construit un interpréteur pour interpreter
 	                                    //  le programme dans  fichier 
-                                      
+
+
+    void startTranspilation();
 	void analyse();                     // Si le contenu du fichier est conforme à la grammaire,
 	                                    //   cette méthode se termine normalement et affiche un message "Syntaxe correcte".
                                       //   la table des symboles (ts) et l'arbre abstrait (arbre) auront été construits
@@ -19,11 +22,13 @@ public:
 
 	inline const TableSymboles & getTable () const  { return m_table;    } // accesseur	
 	inline Noeud* getArbre () const { return m_arbre; }                    // accesseur
-	
+    Generateur &getGenerateur();
+
 private:
     Lecteur        m_lecteur;  // Le lecteur de symboles utilisé pour analyser le fichier
     TableSymboles  m_table;    // La table des symboles valués
     Noeud*         m_arbre;    // L'arbre abstrait
+    Generateur     m_generateur;
 
     // Implémentation de la grammaire
     Noeud*  programme();   //   <programme> ::= procedure principale() <seqInst> finproc FIN_FICHIER
@@ -39,6 +44,8 @@ private:
     Noeud*  instPour();    //
     Noeud*  instEcrire();    //
     Noeud*  instLire();    //
+    Noeud*  instRepeter(); //
+
 
     // outils pour simplifier l'analyse syntaxique
     void tester (const string & symboleAttendu) const;   // Si symbole courant != symboleAttendu, on lève une exception
