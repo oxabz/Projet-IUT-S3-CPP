@@ -35,7 +35,11 @@ private:
     Noeud*  seqInst();	   //     <seqInst> ::= <inst> { <inst> }
     Noeud*  inst();	       //        <inst> ::= <affectation> ; | <instSi>
     Noeud*  affectation(); // <affectation> ::= <variable> = <expression> 
-    Noeud*  expression();  //  <expression> ::= <facteur> { <opBinaire> <facteur> }
+    Noeud*  expression();  //  <expression> ::= <expEt> { ou <expEt> }
+    Noeud*  expEt();  //  <expEt> ::= <expComp> { et <expComp> }
+    Noeud*  expComp();  //<expComp> ::= <expAdd> { == | != | < | <= | > | >= <expAdd> }
+    Noeud*  expAdd();  //  <expAdd> ::= <expMult> { + | - <expMult> }
+    Noeud*  expMult();  //  <facteur> { * | / <facteur> }
     Noeud*  facteur();     //     <facteur> ::= <entier>  |  <variable>  |  - <facteur>  | non <facteur> | ( <expression> )
                            //   <opBinaire> ::= + | - | *  | / | < | > | <= | >= | == | != | et | ou
     Noeud*  instSi();      //      <instSi> ::= si ( <expression> ) <seqInst> finsi

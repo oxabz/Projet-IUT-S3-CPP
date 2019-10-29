@@ -130,12 +130,6 @@
 		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/main.cpp">
 			<Option target="mcomp"/>
 		</Unit>
-		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/testProgrammes/TesterEcrire.cpp">
-			<Option target="mcomp"/>
-		</Unit>
-		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/testProgrammes/TesterEcrire.h">
-			<Option target="mcomp"/>
-		</Unit>
 		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

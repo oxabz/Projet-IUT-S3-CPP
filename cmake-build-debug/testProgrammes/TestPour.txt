@@ -1,0 +1,10 @@
+# Test du pour
+# Résultat attendu :
+# test1 = 7
+# i = 7
+procedure principale()
+ test1 = 2;
+ pour(i=0;i<=7;i=i+1)
+    test1=i;
+ finpour
+finproc

@@ -1,0 +1,8 @@
+# Test du lire
+# Résultat attendu :
+# test1 = 3
+# test2 = <valeur entré>
+procedure principale()
+    test1 = 3;
+    lire(test2);
+finproc
