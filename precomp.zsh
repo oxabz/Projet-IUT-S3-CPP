@@ -1,1 +1,1 @@
-cp -rf ../testProgrammes testProgrammes
+cp -rf testProgrammes ./cmake-build-debug/testProgrammes

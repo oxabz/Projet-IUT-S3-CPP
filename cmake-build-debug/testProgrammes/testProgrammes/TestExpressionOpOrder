@@ -1,0 +1,10 @@
+# Test de l'ordre des expression
+# Résultat attendu :
+# test1 = 16
+# test2 = 1
+# test3 = 1
+procedure principale()
+ test1 = 8*2-1;
+ test2 = 8*2-1 == 8*2-1;
+ test3 = 1 et 1 ou 0 et 1
+finproc

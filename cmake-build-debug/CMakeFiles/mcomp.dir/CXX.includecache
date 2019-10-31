@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/ArbreAbstrait.cpp
-stdlib.h
--
-tgmath.h
--
-ArbreAbstrait.h
-/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/ArbreAbstrait.h
-Symbole.h
-/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Symbole.h
-SymboleValue.h
-/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/SymboleValue.h
-Exceptions.h
-/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Exceptions.h
-Generateur.h
-/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Generateur.h
-
 /home/oxabz/CLionProjects/Projet-IUT-S3-CPP/ArbreAbstrait.h
 vector
 -
@@ -52,6 +36,28 @@ ArbreAbstrait.h
 TableSymboles.h
 /home/oxabz/CLionProjects/Projet-IUT-S3-CPP/TableSymboles.h
 
+/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Interpreteur.h
+Symbole.h
+/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Symbole.h
+Lecteur.h
+/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Lecteur.h
+Exceptions.h
+/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Exceptions.h
+TableSymboles.h
+/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/TableSymboles.h
+ArbreAbstrait.h
+/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/ArbreAbstrait.h
+Generateur.h
+/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Generateur.h
+
+/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Lecteur.h
+fstream
+-
+string
+-
+Symbole.h
+/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Symbole.h
+
 /home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Symbole.h
 iostream
 -
@@ -77,4 +83,12 @@ vector
 -
 iostream
 -
+
+/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/main.cpp
+iostream
+-
+Interpreteur.h
+/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Interpreteur.h
+Exceptions.h
+/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Exceptions.h
 

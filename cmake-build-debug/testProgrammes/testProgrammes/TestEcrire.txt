@@ -1,0 +1,16 @@
+# Test du ecrire
+# Résultat attendu :
+# test1 = 3
+# test2 = 7
+#Affichage de :
+#valeur1: 3
+#valeur2: 7
+#valeur2: 7
+#valeur1: 3
+procedure principale()
+    test1 = 3;
+    test2 = 7;
+    ecrire("valeur1: ",test1);
+    ecrire("valeur2: ",test2);
+    ecrire("valeur2: ",test2,"valeur1: ",test1);
+finproc

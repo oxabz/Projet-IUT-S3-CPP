@@ -1,16 +1,16 @@
 # Fichier de test
-# Les lignes de commentaires commencent par #
 procedure principale()
-  i = 13;
+  i 13;
   si (i>14)
     j=1;
-  sinon
+  sin
+    j=2;
     j=2;
   finsi
   l=4;
-  tantque|l>0)
+  tantque(l>0)
     j=j+1;
-    l=l-1;
+    l+1-1;
   fintantque
   y = 0;
   pour(z=0;z<10;z=z+1)
