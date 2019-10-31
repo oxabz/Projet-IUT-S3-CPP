@@ -18,6 +18,7 @@ public:
     void traduire(Generateur *os) override;
 
     inline void setValeur(int valeur)    { this->m_valeur=valeur; m_defini=true;  } // accesseur
+    inline int getValeur()    { return m_valeur;} // accesseur
 	  inline bool estDefini()              { return m_defini;                       } // accesseur
 
 	  friend ostream & operator << (ostream & cout, const SymboleValue & symbole); // affiche un symbole value sur cout

@@ -79,7 +79,7 @@ Noeud* Interpreteur::seqInst() {
     NoeudSeqInst* sequence = new NoeudSeqInst();
     do {
         sequence->ajoute(inst());
-    } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si"|| m_lecteur.getSymbole() == "tantque"|| m_lecteur.getSymbole() == "pour"||m_lecteur.getSymbole() == "ecrire"||m_lecteur.getSymbole() == "lire");
+    } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si"|| m_lecteur.getSymbole() == "tantque"|| m_lecteur.getSymbole() == "pour"||m_lecteur.getSymbole() == "ecrire"||m_lecteur.getSymbole() == "lire"||m_lecteur.getSymbole() == "repeter"||m_lecteur.getSymbole() == "++"||m_lecteur.getSymbole() == "--"||m_lecteur.getSymbole() == "selon");
     // Tant que le symbole courant est un début possible d'instruction...
     // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
     return sequence;
@@ -103,6 +103,14 @@ Noeud* Interpreteur::inst() {
         return instLire();
     }else if (m_lecteur.getSymbole() == "pour"){
         return instPour();
+    }else if (m_lecteur.getSymbole() == "repeter"){
+        return instRepeter();
+    }else if (m_lecteur.getSymbole() == "++"){
+        return instPreInc();
+    }else if (m_lecteur.getSymbole() == "--"){
+        return instPreDec();
+    }else if (m_lecteur.getSymbole() == "selon"){
+        return instSelon();
     }
     else {
         erreur("Instruction incorrecte");
@@ -115,6 +123,27 @@ Noeud* Interpreteur::affectation() {
     tester("<VARIABLE>");
     Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table eton la mémorise
     m_lecteur.avancer();
+    if(m_lecteur.getSymbole() == "="){
+        testerEtAvancer("=");
+        Noeud* exp = expression();             // On mémorise l'expression trouvée
+        return new NoeudAffectation(var, exp); // On renvoie un noeud affectation
+    } else if(m_lecteur.getSymbole() == "++"){
+        testerEtAvancer("++");
+        return new NoeudPostInc(var);
+    }else if(m_lecteur.getSymbole() == "--"){
+        testerEtAvancer("--");
+        return new NoeudPostDec(var);
+    }else if(m_lecteur.getSymbole() == "+="){
+        testerEtAvancer("+=");
+        Noeud* exp = expression();
+        return new NoeudInc(var, exp);
+    }else if(m_lecteur.getSymbole() == "-="){
+        testerEtAvancer("-=");
+        Noeud* exp = expression();
+        return new NoeudDec(var, exp);
+    }else{
+
+    }
     testerEtAvancer("=");
     Noeud* exp = expression();             // On mémorise l'expression trouvée
     return new NoeudAffectation(var, exp); // On renvoie un noeud affectation
@@ -323,8 +352,48 @@ Noeud *Interpreteur::instRepeter() {
     return new NoeudInstRepeter(exp,sesquInst);
 }
 
+Noeud *Interpreteur::instPreInc() {
+    testerEtAvancer("++");
+    Noeud * fact = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
+    m_lecteur.avancer();
+    return nullptr;
+}
+Noeud *Interpreteur::instPreDec() {
+    testerEtAvancer("--");
+    Noeud * fact = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
+    m_lecteur.avancer();
+    return nullptr;
+}
+
+
 
 Generateur &Interpreteur::getGenerateur() {
     return m_generateur;
+}
+
+Noeud *Interpreteur::instSelon() {
+    testerEtAvancer("selon");
+    testerEtAvancer("(");
+    Noeud * exp = expression();
+    testerEtAvancer(")");
+    vector<Noeud *> ind;
+    vector<Noeud *> instructions;
+    vector<int> breaks;
+    int i=0;
+    while (m_lecteur.getSymbole()=="cas"){
+        m_lecteur.avancer();
+        tester("<ENTIER>");
+        ind.emplace_back(m_table.chercheAjoute(m_lecteur.getSymbole()));
+        m_lecteur.avancer();
+        testerEtAvancer(":");
+        instructions.emplace_back(inst());
+        if(m_lecteur.getSymbole()=="stop"){
+            testerEtAvancer("stop");
+            breaks.emplace_back(i);
+        }
+        i++;
+    }
+    testerEtAvancer("finselon");
+    return new NoeudInstSelon(exp,ind,instructions,breaks);
 }
 

@@ -3,6 +3,10 @@ principale
 finproc
 pour
 finpour
+cas
+finselon
+selon
+stop
 si
 sinon
 sinonsi
@@ -20,8 +24,10 @@ ecrire
 )
 +
 ++
++=
 -
 --
+-=
 *
 /
 ==

@@ -10,10 +10,11 @@ int main(int argc, char* argv[]) {
         cout << "Usage : " << argv[0] << " nom_fichier_source nom_fichier_cpp" << endl << endl;
         cout << "Entrez le nom du fichier que voulez-vous interpréter : ";
         getline(cin, nomFEntree);
-        cout << "Entrez le nom du fichier de sortie";
+        cout << "Entrez le nom du fichier de sortie : ";
         getline(cin, nomFSortie);
     } else
         nomFEntree = argv[1];
+        nomFSortie = argv[2];
     ifstream fEntree(nomFEntree);
     ofstream fSortie(nomFSortie);
 

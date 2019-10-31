@@ -49,6 +49,9 @@ private:
     Noeud*  instEcrire();    //
     Noeud*  instLire();    //
     Noeud*  instRepeter(); //
+    Noeud*  instPreInc(); //
+    Noeud*  instPreDec(); //
+    Noeud*  instSelon(); //
 
 
     // outils pour simplifier l'analyse syntaxique

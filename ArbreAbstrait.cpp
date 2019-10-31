@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <tgmath.h>
 #include "ArbreAbstrait.h"
 #include "Symbole.h"
 #include "SymboleValue.h"
@@ -296,9 +297,9 @@ void NoeudInstLire::traduire(Generateur *os) {
     os->ecrire(";");
 }
 
-////////////////////////////////////////////////////////////////////////////>
+////////////////////////////////////////////////////////////////////////////
 // NoeudInstRepeter
-////////////////////////////////////////////////////////////////////////////>
+////////////////////////////////////////////////////////////////////////////
 
 NoeudInstRepeter::NoeudInstRepeter(Noeud *exp, Noeud *inst) : exp(exp), inst(inst){}
 
@@ -318,3 +319,174 @@ void NoeudInstRepeter::traduire(Generateur *os) {
 
 }
 
+////////////////////////////////////////////////////////////////////////////
+// NoeudInc
+////////////////////////////////////////////////////////////////////////////
+
+NoeudInc::NoeudInc(Noeud *symboleValue, Noeud *exp) : symboleValue(symboleValue), exp(exp) {}
+
+int NoeudInc::executer() {
+    int valeur = exp->executer() + ((SymboleValue*) symboleValue)->getValeur();
+    ((SymboleValue*) symboleValue)->setValeur(valeur);
+    return valeur;
+}
+
+void NoeudInc::traduire(Generateur *os) {
+    symboleValue->traduire(os);
+    os->ecrire("+=");
+    exp->traduire(os);
+    os->ecrire(";");
+}
+
+////////////////////////////////////////////////////////////////////////////
+// NoeudDec
+////////////////////////////////////////////////////////////////////////////
+
+NoeudDec::NoeudDec(Noeud *symboleValue, Noeud *exp) : symboleValue(symboleValue), exp(exp) {}
+
+int NoeudDec::executer() {
+    int valeur = - exp->executer() + ((SymboleValue*) symboleValue)->getValeur();
+    ((SymboleValue*) symboleValue)->setValeur(valeur);
+    return valeur;
+}
+
+void NoeudDec::traduire(Generateur *os) {
+    symboleValue->traduire(os);
+    os->ecrire("+=");
+    exp->traduire(os);
+    os->ecrire(";");
+}
+
+////////////////////////////////////////////////////////////////////////////
+// NoeudPostInc
+////////////////////////////////////////////////////////////////////////////
+
+NoeudPostInc::NoeudPostInc(Noeud *symboleValue) : symboleValue(symboleValue) {}
+
+int NoeudPostInc::executer() {
+    int valeur = 1 + ((SymboleValue*) symboleValue)->getValeur();
+    ((SymboleValue*) symboleValue)->setValeur(valeur);
+    return valeur - 1;
+}
+
+void NoeudPostInc::traduire(Generateur *os) {
+    symboleValue->traduire(os);
+    os->ecrire("++;");
+}
+
+////////////////////////////////////////////////////////////////////////////
+// NoeudPostDec
+////////////////////////////////////////////////////////////////////////////
+
+NoeudPostDec::NoeudPostDec(Noeud *symboleValue) : symboleValue(symboleValue) {}
+
+int NoeudPostDec::executer() {
+    int valeur = ((SymboleValue*) symboleValue)->getValeur() - 1;
+    ((SymboleValue*) symboleValue)->setValeur(valeur);
+    return valeur + 1;
+}
+
+void NoeudPostDec::traduire(Generateur *os) {
+    symboleValue->traduire(os);
+    os->ecrire("--;");
+}
+
+////////////////////////////////////////////////////////////////////////////
+// NoeudPreInc
+////////////////////////////////////////////////////////////////////////////
+
+NoeudPreInc::NoeudPreInc(Noeud *symboleValue) : symboleValue(symboleValue) {}
+
+int NoeudPreInc::executer() {
+    int valeur = ((SymboleValue*) symboleValue)->getValeur() + 1;
+    ((SymboleValue*) symboleValue)->setValeur(valeur);
+    return valeur;
+}
+
+void NoeudPreInc::traduire(Generateur *os) {
+    os->ecrire("++");
+    symboleValue->traduire(os);
+    os->ecrire(";");
+}
+
+////////////////////////////////////////////////////////////////////////////
+// NoeudPreDec
+////////////////////////////////////////////////////////////////////////////
+
+NoeudPreDec::NoeudPreDec(Noeud *symboleValue) : symboleValue(symboleValue) {}
+
+int NoeudPreDec::executer() {
+    int valeur = ((SymboleValue*) symboleValue)->getValeur() - 1;
+    ((SymboleValue*) symboleValue)->setValeur(valeur);
+    return valeur;
+}
+
+void NoeudPreDec::traduire(Generateur *os) {
+    os->ecrire("--");
+    symboleValue->traduire(os);
+    os->ecrire(";");
+}
+
+NoeudInstSelon::NoeudInstSelon(Noeud *exp,
+                               const vector<Noeud *> &symboleValue,
+                               const vector<Noeud *> &sequinst,
+                               const vector<int> &breaks):
+                exp(exp),
+                symboleValue(symboleValue),
+                sequInst(sequinst),
+                breaks(breaks){}
+
+int NoeudInstSelon::executer() {
+    int i = 0;
+    while(i < symboleValue.size() && symboleValue[i]->executer() != exp->executer()){
+        i++;
+    }
+    do{
+        sequInst[i++]->executer();
+    }while(
+        [this,i](){
+            for(int j : breaks){
+                if(j==i-1){
+                    return false;
+                }
+            }
+            return true;
+        }()&&
+    i < symboleValue.size());
+    return 0;
+}
+
+void NoeudInstSelon::traduire(Generateur *os) {
+    os->ecrireLigne("switch");
+    os->ecrire("(");
+    exp->traduire(os);
+    os->ecrire(")");
+    os->ecrire("{");
+    os->incNiveau();
+    for (int i = 0; i < symboleValue.size(); ++i) {
+        os->ecrireLigne("case ");
+        symboleValue[i]->traduire(os);
+        os->ecrire(":");
+        os->incNiveau();
+        if(typeid(*sequInst[i])== typeid(NoeudSeqInst)){
+            for (int j = 0; j < ((NoeudSeqInst*)sequInst[i])->length(); ++j) {
+                ((NoeudSeqInst*)sequInst[i])->getInst(j)->traduire(os);
+            }
+        } else{
+            sequInst[i]->traduire(os);
+        }
+        if([this,i](){
+            for(int j : breaks){
+                if(j=i){
+                    return false;
+                }
+            }
+            return true;
+        }()){
+            os->ecrireLigne("break;");
+        }
+        os->decNiveau();
+    }
+    os->decNiveau();
+    os->ecrireLigne("}");
+}

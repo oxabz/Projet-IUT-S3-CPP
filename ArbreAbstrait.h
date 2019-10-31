@@ -188,4 +188,96 @@ public:
 private:
     Noeud * symboleValue;
 };
+
+/////////////////////////////////////////////////////////////////////////////
+class NoeudInc : public Noeud{
+public:
+
+    NoeudInc(Noeud *symboleValue, Noeud *exp);
+
+    int executer() override;
+
+    void traduire(Generateur *os) override;
+
+private:
+    Noeud * symboleValue;
+    Noeud * exp;
+};
+/////////////////////////////////////////////////////////////////////////////
+class NoeudDec : public Noeud{
+public:
+
+    NoeudDec(Noeud *symboleValue, Noeud *exp);
+
+    int executer() override;
+
+    void traduire(Generateur *os) override;
+
+private:
+    Noeud * symboleValue;
+    Noeud * exp;
+};
+/////////////////////////////////////////////////////////////////////////////
+class NoeudPostInc : public Noeud{
+public:
+    NoeudPostInc(Noeud *symboleValue);
+
+    int executer() override;
+
+    void traduire(Generateur *os) override;
+
+private:
+    Noeud * symboleValue;
+};
+/////////////////////////////////////////////////////////////////////////////
+class NoeudPostDec : public Noeud{
+public:
+    NoeudPostDec(Noeud *symboleValue);
+
+    int executer() override;
+
+    void traduire(Generateur *os) override;
+
+private:
+    Noeud * symboleValue;
+};
+/////////////////////////////////////////////////////////////////////////////
+class NoeudPreInc : public Noeud{
+public:
+    NoeudPreInc(Noeud *symboleValue);
+
+    int executer() override;
+
+    void traduire(Generateur *os) override;
+
+private:
+    Noeud * symboleValue;
+};
+/////////////////////////////////////////////////////////////////////////////
+class NoeudPreDec : public Noeud{
+public:
+    NoeudPreDec(Noeud *symboleValue);
+
+    int executer() override;
+
+    void traduire(Generateur *os) override;
+
+private:
+    Noeud * symboleValue;
+};
+/////////////////////////////////////////////////////////////////////////////
+class NoeudInstSelon : public Noeud{
+public:
+    NoeudInstSelon(Noeud * exp, const vector<Noeud*> &symboleValue, const vector<Noeud*> &sequinst, const vector<int>&breaks);
+
+    int executer() override;
+
+    void traduire(Generateur *os) override;
+
+private:
+    Noeud * exp;
+    vector<Noeud *> symboleValue;
+    vector<Noeud *> sequInst;
+    vector<int> breaks;
+};
 #endif /* ARBREABSTRAIT_H */
