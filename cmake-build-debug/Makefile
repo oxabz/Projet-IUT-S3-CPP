@@ -231,6 +231,33 @@ Lecteur.cpp.s:
 	$(MAKE) -f CMakeFiles/mcomp.dir/build.make CMakeFiles/mcomp.dir/Lecteur.cpp.s
 .PHONY : Lecteur.cpp.s
 
+Procedure.o: Procedure.cpp.o
+
+.PHONY : Procedure.o
+
+# target to build an object file
+Procedure.cpp.o:
+	$(MAKE) -f CMakeFiles/mcomp.dir/build.make CMakeFiles/mcomp.dir/Procedure.cpp.o
+.PHONY : Procedure.cpp.o
+
+Procedure.i: Procedure.cpp.i
+
+.PHONY : Procedure.i
+
+# target to preprocess a source file
+Procedure.cpp.i:
+	$(MAKE) -f CMakeFiles/mcomp.dir/build.make CMakeFiles/mcomp.dir/Procedure.cpp.i
+.PHONY : Procedure.cpp.i
+
+Procedure.s: Procedure.cpp.s
+
+.PHONY : Procedure.s
+
+# target to generate assembly for a file
+Procedure.cpp.s:
+	$(MAKE) -f CMakeFiles/mcomp.dir/build.make CMakeFiles/mcomp.dir/Procedure.cpp.s
+.PHONY : Procedure.cpp.s
+
 Symbole.o: Symbole.cpp.o
 
 .PHONY : Symbole.o
@@ -360,6 +387,9 @@ help:
 	@echo "... Lecteur.o"
 	@echo "... Lecteur.i"
 	@echo "... Lecteur.s"
+	@echo "... Procedure.o"
+	@echo "... Procedure.i"
+	@echo "... Procedure.s"
 	@echo "... Symbole.o"
 	@echo "... Symbole.i"
 	@echo "... Symbole.s"

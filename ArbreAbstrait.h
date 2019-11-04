@@ -14,6 +14,7 @@ using namespace std;
 #include "Exceptions.h"
 
 class Generateur;
+class Procedure;
 
 ////////////////////////////////////////////////////////////////////////////////
 class Noeud {
@@ -279,5 +280,22 @@ private:
     vector<Noeud *> symboleValue;
     vector<Noeud *> sequInst;
     vector<int> breaks;
+};
+/////////////////////////////////////////////////////////////////////////////
+class NoeudInstAppel : public Noeud{
+public:
+
+    NoeudInstAppel(const string & procedureName,Procedure *procedure, const vector<Noeud*> & arguments);
+
+    int executer() override;
+
+    void traduire(Generateur *os) override;
+
+private:
+
+    string procedureName;
+    Procedure * procedure;
+    vector<Noeud *> arguments;
+
 };
 #endif /* ARBREABSTRAIT_H */

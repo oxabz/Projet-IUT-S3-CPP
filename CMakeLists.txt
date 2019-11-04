@@ -8,4 +8,4 @@ file(COPY programme.txt motsCle.txt DESTINATION .)
 file(COPY testProgrammes motsCle.txt DESTINATION .)
 
 
-add_executable(mcomp main.cpp ArbreAbstrait.cpp ArbreAbstrait.h Exceptions.h Interpreteur.cpp Interpreteur.h Lecteur.cpp Lecteur.h Symbole.cpp Symbole.h SymboleValue.cpp SymboleValue.h TableSymboles.cpp TableSymboles.h Generateur.cpp Generateur.h)
+add_executable(mcomp main.cpp ArbreAbstrait.cpp ArbreAbstrait.h Exceptions.h Interpreteur.cpp Interpreteur.h Lecteur.cpp Lecteur.h Symbole.cpp Symbole.h SymboleValue.cpp SymboleValue.h TableSymboles.cpp TableSymboles.h Generateur.cpp Generateur.h Procedure.cpp Procedure.h)

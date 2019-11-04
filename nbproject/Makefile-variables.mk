@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=m3105-tp5
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/m3105-tp5
+CND_ARTIFACT_NAME_Debug=projet-iut-s3-cpp
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/projet-iut-s3-cpp
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=m3105-tp5.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/m3105-tp5.tar
+CND_PACKAGE_NAME_Debug=projet-iut-s3-cpp.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/projet-iut-s3-cpp.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=m3105-tp5
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/m3105-tp5
+CND_ARTIFACT_NAME_Release=projet-iut-s3-cpp
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/projet-iut-s3-cpp
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=m3105-tp5.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/m3105-tp5.tar
+CND_PACKAGE_NAME_Release=projet-iut-s3-cpp.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/projet-iut-s3-cpp.tar
 #
 # include compiler specific variables
 #

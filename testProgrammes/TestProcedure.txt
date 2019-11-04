@@ -1,0 +1,11 @@
+procedure exchange(param1,param2)
+ test1 = param1;
+ param1 = param2;
+ param2 = test1;
+finproc
+
+procedure principale()
+ test1=1;
+ test2=2;
+ exchange(test1,test2);
+finproc

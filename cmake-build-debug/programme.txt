@@ -8,7 +8,7 @@ procedure principale()
     j=2;
   finsi
   l=4;
-  tantque|l>0)
+  tantque(l>0)
     j=j+1;
     l=l-1;
   fintantque

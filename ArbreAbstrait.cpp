@@ -4,6 +4,7 @@
 #include "Symbole.h"
 #include "SymboleValue.h"
 #include "Exceptions.h"
+#include "Procedure.h"
 
 #include "Generateur.h"
 ////////////////////////////////////////////////////////////////////////////////
@@ -151,8 +152,9 @@ int NoeudInstSiRiche::executer() {
 }
 
 void NoeudInstSiRiche::traduire(Generateur *os) {
-    os->ecrireLigne("if");
+    os->ecrireLigne("if(");
     this->m_conditions[0]->traduire(os);
+    os->ecrireLigne(")");
     if(typeid(*m_sequences[0])== typeid(NoeudSeqInst)){
         m_sequences[0]->traduire(os);
     }else{
@@ -477,7 +479,7 @@ void NoeudInstSelon::traduire(Generateur *os) {
         }
         if([this,i](){
             for(int j : breaks){
-                if(j=i){
+                if(j==i){
                     return false;
                 }
             }
@@ -490,3 +492,23 @@ void NoeudInstSelon::traduire(Generateur *os) {
     os->decNiveau();
     os->ecrireLigne("}");
 }
+
+NoeudInstAppel::NoeudInstAppel(const string & procedureName, Procedure *procedure, const vector<Noeud*> & arguments) : procedureName(procedureName),procedure(procedure),
+                                                                                       arguments(arguments) {}
+
+int NoeudInstAppel::executer() {
+    procedure->execute(arguments);
+    return 0;
+}
+
+void NoeudInstAppel::traduire(Generateur *os) {
+    os->ecrireLigne(procedureName);
+    os->ecrire("(");
+    for (int i = 0; i < arguments.size(); ++i) {
+        arguments[i]->traduire(os);
+        if(i < arguments.size()-1)
+            os->ecrire(",");
+    }
+    os->ecrire(");");
+}
+

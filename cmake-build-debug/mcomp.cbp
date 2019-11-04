@@ -109,6 +109,12 @@
 		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Lecteur.h">
 			<Option target="mcomp"/>
 		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Procedure.cpp">
+			<Option target="mcomp"/>
+		</Unit>
+		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Procedure.h">
+			<Option target="mcomp"/>
+		</Unit>
 		<Unit filename="/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Symbole.cpp">
 			<Option target="mcomp"/>
 		</Unit>

@@ -1,12 +1,15 @@
 #ifndef INTERPRETEUR_H
 #define INTERPRETEUR_H
 
+#include <map>
+
 #include "Symbole.h"
 #include "Lecteur.h"
 #include "Exceptions.h"
 #include "TableSymboles.h"
 #include "ArbreAbstrait.h"
 #include "Generateur.h"
+#include "Procedure.h"
 
 class Interpreteur {
 public:
@@ -20,7 +23,7 @@ public:
                                       //   la table des symboles (ts) et l'arbre abstrait (arbre) auront été construits
 	                                    // Sinon, une exception sera levée
 
-	inline const TableSymboles & getTable () const  { return m_table;    } // accesseur	
+	inline const TableSymboles & getTable () const  { return *m_table;    } // accesseur
 	inline Noeud* getArbre () const { return m_arbre; }                    // accesseur
     Generateur &getGenerateur();
 
@@ -28,9 +31,10 @@ public:
 
 private:
     Lecteur        m_lecteur;  // Le lecteur de symboles utilisé pour analyser le fichier
-    TableSymboles  m_table;    // La table des symboles valués
+    TableSymboles* m_table;    // La table des symboles valués
     Noeud*         m_arbre;    // L'arbre abstrait
     Generateur     m_generateur;
+    map<string,Procedure*> m_procedures;
 
     int m_nbErreur;
 
@@ -50,12 +54,13 @@ private:
     Noeud*  instSiRiche(); // <instSiRiche> ::= si ( <expression> ) <seqInst> finsi
     Noeud*  instTantQue(); //
     Noeud*  instPour();    //
-    Noeud*  instEcrire();    //
+    Noeud*  instEcrire();  //
     Noeud*  instLire();    //
     Noeud*  instRepeter(); //
-    Noeud*  instPreInc(); //
-    Noeud*  instPreDec(); //
-    Noeud*  instSelon(); //
+    Noeud*  instPreInc();  //
+    Noeud*  instPreDec();  //
+    Noeud*  instSelon();   //
+    Noeud*  instAppel();   //
 
 
     // outils pour simplifier l'analyse syntaxique

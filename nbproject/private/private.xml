@@ -7,17 +7,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/users/info/pub/2a/M3105/M3105-TP5/Exceptions.h</file>
-            <file>file:/users/info/pub/2a/M3105/M3105-TP5/ArbreAbstrait.h</file>
-            <file>file:/users/info/pub/2a/M3105/M3105-TP5/Symbole.cpp</file>
-            <file>file:/users/info/pub/2a/M3105/M3105-TP5/main.cpp</file>
-            <file>file:/users/info/pub/2a/M3105/M3105-TP5/Interpreteur.h</file>
-            <file>file:/users/info/pub/2a/M3105/M3105-TP5/Interpreteur.cpp</file>
-            <file>file:/users/info/pub/2a/M3105/M3105-TP5/Lecteur.cpp</file>
-            <file>file:/users/info/pub/2a/M3105/M3105-TP5/SymboleValue.h</file>
-            <file>file:/users/info/pub/2a/M3105/M3105-TP5/Symbole.h</file>
-            <file>file:/users/info/pub/2a/M3105/M3105-TP5/TableSymboles.h</file>
-            <file>file:/users/info/pub/2a/M3105/M3105-TP5/Lecteur.h</file>
+            <file>file:/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/nbproject/Makefile-variables.mk</file>
+            <file>file:/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/tests/newtestclass1.cpp</file>
+            <file>file:/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/nbproject/Makefile-impl.mk</file>
+            <file>file:/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Generateur.cpp</file>
+            <file>file:/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/ArbreAbstrait.cpp</file>
+            <file>file:/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/ArbreAbstrait.h</file>
+            <file>file:/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/tests/newtestclass.cpp</file>
+            <file>file:/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Makefile</file>
+            <file>file:/home/oxabz/CLionProjects/Projet-IUT-S3-CPP/Interpreteur.h</file>
         </group>
     </open-files>
 </project-private>
