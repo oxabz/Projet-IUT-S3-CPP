@@ -48,7 +48,12 @@ class NoeudSeqInst : public Noeud {
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-class NoeudAffectation : public Noeud {
+class NoeudAffectAbstr : public Noeud{
+public:
+    virtual void traduireInline(Generateur *os) = 0;
+};
+
+class NoeudAffectation : public NoeudAffectAbstr {
 // Classe pour représenter un noeud "affectation"
 //  composé de 2 fils : la variable et l'expression qu'on lui affecte
   public:
@@ -56,7 +61,7 @@ class NoeudAffectation : public Noeud {
     ~NoeudAffectation() {}   // A cause du destructeur virtuel de la classe Noeud
     int executer() override; // Exécute (évalue) l'expression et affecte sa valeur à la variable
     void traduire(Generateur *os) override;
-    void traduireInline(Generateur *os);
+    void traduireInline(Generateur *os) override ;
 
 private:
     Noeud* m_variable;
@@ -191,7 +196,7 @@ private:
 };
 
 /////////////////////////////////////////////////////////////////////////////
-class NoeudInc : public Noeud{
+class NoeudInc : public NoeudAffectAbstr {
 public:
 
     NoeudInc(Noeud *symboleValue, Noeud *exp);
@@ -199,13 +204,14 @@ public:
     int executer() override;
 
     void traduire(Generateur *os) override;
+    void traduireInline(Generateur *os)override ;
 
 private:
     Noeud * symboleValue;
     Noeud * exp;
 };
 /////////////////////////////////////////////////////////////////////////////
-class NoeudDec : public Noeud{
+class NoeudDec : public NoeudAffectAbstr{
 public:
 
     NoeudDec(Noeud *symboleValue, Noeud *exp);
@@ -213,55 +219,60 @@ public:
     int executer() override;
 
     void traduire(Generateur *os) override;
+    void traduireInline(Generateur *os)override ;
 
 private:
     Noeud * symboleValue;
     Noeud * exp;
 };
 /////////////////////////////////////////////////////////////////////////////
-class NoeudPostInc : public Noeud{
+class NoeudPostInc : public NoeudAffectAbstr{
 public:
     NoeudPostInc(Noeud *symboleValue);
 
     int executer() override;
 
     void traduire(Generateur *os) override;
+    void traduireInline(Generateur *os)override ;
 
 private:
     Noeud * symboleValue;
 };
 /////////////////////////////////////////////////////////////////////////////
-class NoeudPostDec : public Noeud{
+class NoeudPostDec : public NoeudAffectAbstr{
 public:
     NoeudPostDec(Noeud *symboleValue);
 
     int executer() override;
 
     void traduire(Generateur *os) override;
+    void traduireInline(Generateur *os)override ;
 
 private:
     Noeud * symboleValue;
 };
 /////////////////////////////////////////////////////////////////////////////
-class NoeudPreInc : public Noeud{
+class NoeudPreInc : public NoeudAffectAbstr{
 public:
     NoeudPreInc(Noeud *symboleValue);
 
     int executer() override;
 
     void traduire(Generateur *os) override;
+    void traduireInline(Generateur *os)override ;
 
 private:
     Noeud * symboleValue;
 };
 /////////////////////////////////////////////////////////////////////////////
-class NoeudPreDec : public Noeud{
+class NoeudPreDec : public NoeudAffectAbstr{
 public:
     NoeudPreDec(Noeud *symboleValue);
 
     int executer() override;
 
     void traduire(Generateur *os) override;
+    void traduireInline(Generateur *os)override ;
 
 private:
     Noeud * symboleValue;
@@ -285,7 +296,7 @@ private:
 class NoeudInstAppel : public Noeud{
 public:
 
-    NoeudInstAppel(const string & procedureName,Procedure *procedure, const vector<Noeud*> & arguments);
+    NoeudInstAppel(string procedureName, Procedure* procedure, vector<Noeud*> arguments);
 
     int executer() override;
 

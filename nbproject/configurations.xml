@@ -9,6 +9,7 @@
       <itemPath>Generateur.h</itemPath>
       <itemPath>Interpreteur.h</itemPath>
       <itemPath>Lecteur.h</itemPath>
+      <itemPath>Procedure.h</itemPath>
       <itemPath>Symbole.h</itemPath>
       <itemPath>SymboleValue.h</itemPath>
       <itemPath>TableSymboles.h</itemPath>
@@ -26,6 +27,7 @@
       <itemPath>Generateur.cpp</itemPath>
       <itemPath>Interpreteur.cpp</itemPath>
       <itemPath>Lecteur.cpp</itemPath>
+      <itemPath>Procedure.cpp</itemPath>
       <itemPath>Symbole.cpp</itemPath>
       <itemPath>SymboleValue.cpp</itemPath>
       <itemPath>TableSymboles.cpp</itemPath>
@@ -35,13 +37,29 @@
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
-      <logicalFolder name="f1"
-                     displayName="New CppUnit Test"
+      <logicalFolder name="f2"
+                     displayName="Interpreteur Test CppUnit"
                      projectFiles="true"
                      kind="TEST">
-        <itemPath>tests/newtestclass1.cpp</itemPath>
-        <itemPath>tests/newtestclass1.h</itemPath>
-        <itemPath>tests/newtestrunner1.cpp</itemPath>
+        <itemPath>tests/newtestclass2.cpp</itemPath>
+        <itemPath>tests/newtestclass2.h</itemPath>
+        <itemPath>tests/newtestrunner2.cpp</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f2"
+                     displayName="Interpreteur Test CppUnit"
+                     projectFiles="true"
+                     kind="TEST">
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -83,6 +101,10 @@
       </item>
       <item path="Lecteur.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Procedure.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Procedure.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Symbole.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Symbole.h" ex="false" tool="3" flavor2="0">
@@ -95,7 +117,7 @@
       </item>
       <item path="TableSymboles.h" ex="false" tool="3" flavor2="0">
       </item>
-      <folder path="TestFiles/f1">
+      <folder path="TestFiles/f2">
         <cTool>
           <commandLine>`cppunit-config --cflags`</commandLine>
         </cTool>
@@ -103,7 +125,7 @@
           <commandLine>`cppunit-config --cflags`</commandLine>
         </ccTool>
         <linkerTool>
-          <output>${TESTDIR}/TestFiles/f1</output>
+          <output>${TESTDIR}/TestFiles/f2</output>
           <linkerLibItems>
             <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
           </linkerLibItems>
@@ -115,11 +137,11 @@
       </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/newtestclass1.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/newtestclass2.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="tests/newtestclass1.h" ex="false" tool="3" flavor2="0">
+      <item path="tests/newtestclass2.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/newtestrunner1.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/newtestrunner2.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -160,6 +182,10 @@
       </item>
       <item path="Lecteur.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Procedure.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Procedure.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Symbole.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Symbole.h" ex="false" tool="3" flavor2="0">
@@ -172,7 +198,7 @@
       </item>
       <item path="TableSymboles.h" ex="false" tool="3" flavor2="0">
       </item>
-      <folder path="TestFiles/f1">
+      <folder path="TestFiles/f2">
         <cTool>
           <commandLine>`cppunit-config --cflags`</commandLine>
         </cTool>
@@ -180,7 +206,7 @@
           <commandLine>`cppunit-config --cflags`</commandLine>
         </ccTool>
         <linkerTool>
-          <output>${TESTDIR}/TestFiles/f1</output>
+          <output>${TESTDIR}/TestFiles/f2</output>
           <linkerLibItems>
             <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
           </linkerLibItems>
@@ -192,11 +218,11 @@
       </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/newtestclass1.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/newtestclass2.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="tests/newtestclass1.h" ex="false" tool="3" flavor2="0">
+      <item path="tests/newtestclass2.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/newtestrunner1.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/newtestrunner2.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

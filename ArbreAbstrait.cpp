@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <tgmath.h>
+#include <algorithm>
 #include "ArbreAbstrait.h"
 #include "Symbole.h"
 #include "SymboleValue.h"
@@ -230,11 +231,11 @@ int NoeudInstPour::executer() {
 
 void NoeudInstPour::traduire(Generateur *os) {
     os->ecrireLigne("for(");
-    ((NoeudAffectation*)this->m_assignation)->traduireInline(os);
+    ((NoeudAffectAbstr*)this->m_assignation)->traduireInline(os);
     os->ecrire("; ");
     this->m_condition->traduire(os);
     os->ecrire("; ");
-    ((NoeudAffectation*)this->m_incrementation)->traduireInline(os);
+    ((NoeudAffectAbstr*)this->m_incrementation)->traduireInline(os);
     os->ecrire(")");
     if(typeid(*m_sequence)== typeid(NoeudSeqInst)){
         m_sequence->traduire(os);
@@ -257,7 +258,17 @@ int NoeudInstEcrire::executer() {
     for (int i = 0; i < noeuds.size(); ++i) {
         if  (typeid(*noeuds[i])==typeid(SymboleValue) && *((SymboleValue*)noeuds[i])== "<CHAINE>" ){
             std::string res = ((SymboleValue*)noeuds[i])->getChaine();
-            cout<<res.substr(1,res.size()-2);
+            res = res.substr(1,res.size()-2);
+            while(res.find("\\n") != std::string::npos) {
+                res.replace(res.find("\\n"),2,"\n");
+            }
+            while(res.find("\\t") != std::string::npos) {
+                res.replace(res.find("\\t"),2,"\t");
+            }
+            while(res.find("\\27") != std::string::npos) {
+                res.replace(res.find("\\27"),3,"\x1b");
+            }
+            cout<<res;
         }else{
             cout<<noeuds[i]->executer();
         }
@@ -340,6 +351,12 @@ void NoeudInc::traduire(Generateur *os) {
     os->ecrire(";");
 }
 
+void NoeudInc::traduireInline(Generateur *os) {
+    symboleValue->traduire(os);
+    os->ecrire("+=");
+    exp->traduire(os);
+}
+
 ////////////////////////////////////////////////////////////////////////////
 // NoeudDec
 ////////////////////////////////////////////////////////////////////////////
@@ -353,10 +370,17 @@ int NoeudDec::executer() {
 }
 
 void NoeudDec::traduire(Generateur *os) {
+    os->ecrireLigne("");
     symboleValue->traduire(os);
-    os->ecrire("+=");
+    os->ecrire("-=");
     exp->traduire(os);
     os->ecrire(";");
+}
+
+void NoeudDec::traduireInline(Generateur *os) {
+    symboleValue->traduire(os);
+    os->ecrire("-=");
+    exp->traduire(os);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -372,10 +396,14 @@ int NoeudPostInc::executer() {
 }
 
 void NoeudPostInc::traduire(Generateur *os) {
+    os->ecrireLigne("");
     symboleValue->traduire(os);
     os->ecrire("++;");
 }
-
+void NoeudPostInc::traduireInline(Generateur *os) {
+    symboleValue->traduire(os);
+    os->ecrire("++");
+}
 ////////////////////////////////////////////////////////////////////////////
 // NoeudPostDec
 ////////////////////////////////////////////////////////////////////////////
@@ -389,8 +417,15 @@ int NoeudPostDec::executer() {
 }
 
 void NoeudPostDec::traduire(Generateur *os) {
+    os->ecrireLigne("");
     symboleValue->traduire(os);
     os->ecrire("--;");
+}
+
+void NoeudPostDec::traduireInline(Generateur *os) {
+    os->ecrireLigne("");
+    symboleValue->traduire(os);
+    os->ecrire("--");
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -406,9 +441,13 @@ int NoeudPreInc::executer() {
 }
 
 void NoeudPreInc::traduire(Generateur *os) {
-    os->ecrire("++");
+    os->ecrireLigne("++");
     symboleValue->traduire(os);
     os->ecrire(";");
+}
+void NoeudPreInc::traduireInline(Generateur *os) {
+    os->ecrire("++");
+    symboleValue->traduire(os);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -424,9 +463,14 @@ int NoeudPreDec::executer() {
 }
 
 void NoeudPreDec::traduire(Generateur *os) {
-    os->ecrire("--");
+    os->ecrireLigne("--");
     symboleValue->traduire(os);
     os->ecrire(";");
+}
+
+void NoeudPreDec::traduireInline(Generateur *os) {
+    os->ecrire("--");
+    symboleValue->traduire(os);
 }
 
 NoeudInstSelon::NoeudInstSelon(Noeud *exp,
@@ -493,8 +537,9 @@ void NoeudInstSelon::traduire(Generateur *os) {
     os->ecrireLigne("}");
 }
 
-NoeudInstAppel::NoeudInstAppel(const string & procedureName, Procedure *procedure, const vector<Noeud*> & arguments) : procedureName(procedureName),procedure(procedure),
-                                                                                       arguments(arguments) {}
+NoeudInstAppel::NoeudInstAppel(string procedureName, Procedure* procedure, vector<Noeud*> arguments) :
+    procedureName(procedureName), procedure(procedure), arguments(arguments) {
+    }
 
 int NoeudInstAppel::executer() {
     procedure->execute(arguments);

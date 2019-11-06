@@ -4,7 +4,10 @@
 
 #include "Generateur.h"
 
-Generateur::Generateur(ostream &mFile) : m_niveau(0), m_file(mFile){}
+Generateur::Generateur(ostream &mFile) : m_niveau(0), m_file(mFile){
+    if (m_file.fail()) // si le fichier ne peut-être lu...
+        throw FichierException();
+}
 
 void Generateur::incNiveau() {
     m_niveau++;

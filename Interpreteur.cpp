@@ -147,6 +147,10 @@ Noeud *Interpreteur::programme() {
     }
     tester("<FINDEFICHIER>");
     if (m_nbErreur) {
+        static char messageWhat[256];
+        sprintf(messageWhat,
+                "%d erreurs de syntaxe",m_nbErreur);
+        throw SyntaxeException(messageWhat);
         return nullptr;
     } else {
         return m_procedures["principale"]->getArbre();
@@ -467,8 +471,12 @@ Noeud *Interpreteur::instSelon() {
     int i = 0;
     while (m_lecteur.getSymbole() == "cas") {
         m_lecteur.avancer();
-        TESTERTRYCATCH("<ENTIER>");
-        ind.emplace_back(m_table->chercheAjoute(m_lecteur.getSymbole()));
+        try{
+            tester("<ENTIER>");
+        }catch(SyntaxeException &e){
+            m_nbErreur++;
+            m_lecteur.avancer();
+        }ind.emplace_back(m_table->chercheAjoute(m_lecteur.getSymbole()));
         m_lecteur.avancer();
         testerEtAvancer(":");
         instructions.emplace_back(inst());

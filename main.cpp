@@ -12,9 +12,10 @@ int main(int argc, char* argv[]) {
         getline(cin, nomFEntree);
         cout << "Entrez le nom du fichier de sortie : ";
         getline(cin, nomFSortie);
-    } else
+    } else{
         nomFEntree = argv[1];
         nomFSortie = argv[2];
+    }
     ifstream fEntree(nomFEntree);
     ofstream fSortie(nomFSortie);
 

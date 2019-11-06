@@ -11,9 +11,9 @@ procedure principale()
  si ( 0 )
     test2 = 0 ;
  sinon
-    test = 1
- finsi ;
- test3 = 0
+    test2 = 1;
+ finsi
+ test3 = 0;
  si (0)
     test3 = 0;
  sinonsi (1)
