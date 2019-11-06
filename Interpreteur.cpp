@@ -445,14 +445,16 @@ Noeud *Interpreteur::instPreInc() {
     testerEtAvancer("++");
     Noeud *fact = m_table->chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
     m_lecteur.avancer();
-    return nullptr;
+    testerEtAvancer(";");
+    return new NoeudPreInc(fact);
 }
 
 Noeud *Interpreteur::instPreDec() {
     testerEtAvancer("--");
     Noeud *fact = m_table->chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
     m_lecteur.avancer();
-    return nullptr;
+    testerEtAvancer(";");
+    return new NoeudPreDec(fact);
 }
 
 

@@ -345,6 +345,7 @@ int NoeudInc::executer() {
 }
 
 void NoeudInc::traduire(Generateur *os) {
+    os->ecrireLigne("");
     symboleValue->traduire(os);
     os->ecrire("+=");
     exp->traduire(os);
