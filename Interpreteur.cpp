@@ -41,22 +41,26 @@ void Interpreteur::startTranspilation() {
                 }
                 m_generateur.ecrire("){");
                 m_generateur.incNiveau();
-                m_generateur.ecrireLigne("int ");
-                for (int i = 0; i < procedure.second->getTableSymboles()->getTaille(); ++i) {
-                    if ((*procedure.second->getTableSymboles())[i] == "<VARIABLE>"&&[procedure,i](){
-                        for (int j = 0; j < procedure.second->getParameters().size(); ++j) {
-                            if((*procedure.second->getTableSymboles())[i].getChaine() == procedure.second->getParameters()[j].getChaine())
-                                return false;
-                        }
-                        return true;
-                    }()) {
-                        m_generateur.ecrire((*procedure.second->getTableSymboles())[i].getChaine());
-                        if (i < procedure.second->getTableSymboles()->getTaille() - 1) {
-                            m_generateur.ecrire(",");
+                if (procedure.second->getParameters().size() - procedure.second->getParameters().size() != 0) {
+                    m_generateur.ecrireLigne("int ");
+                    for (int i = 0; i < procedure.second->getTableSymboles()->getTaille(); ++i) {
+                        if ((*procedure.second->getTableSymboles())[i] == "<VARIABLE>" && [procedure, i]() {
+                            for (int j = 0; j < procedure.second->getParameters().size(); ++j) {
+                                if ((*procedure.second->getTableSymboles())[i].getChaine() ==
+                                    procedure.second->getParameters()[j].getChaine())
+                                    return false;
+                            }
+                            return true;
+                        }()) {
+                            m_generateur.ecrire((*procedure.second->getTableSymboles())[i].getChaine());
+                            if (i < procedure.second->getTableSymboles()->getTaille() - 1 -
+                                    procedure.second->getParameters().size()) {
+                                m_generateur.ecrire(",");
+                            }
                         }
                     }
+                    m_generateur.ecrire(";");
                 }
-                m_generateur.ecrire(";");
                 for (int j = 0; j < ((NoeudSeqInst *) procedure.second->getArbre())->length(); ++j) {
                     ((NoeudSeqInst *) procedure.second->getArbre())->getInst(j)->traduire(&this->m_generateur);
                 }
@@ -149,7 +153,7 @@ Noeud *Interpreteur::programme() {
     if (m_nbErreur) {
         static char messageWhat[256];
         sprintf(messageWhat,
-                "%d erreurs de syntaxe",m_nbErreur);
+                "%d erreurs de syntaxe", m_nbErreur);
         throw SyntaxeException(messageWhat);
         return nullptr;
     } else {
@@ -177,7 +181,8 @@ Noeud *Interpreteur::seqInst() {
 Noeud *Interpreteur::inst() {
     // <inst> ::= <affectation>  ; | <instSi>
     try {
-        if (m_lecteur.getSymbole() == "<VARIABLE>" && m_procedures.find(m_lecteur.getSymbole().getChaine()) != m_procedures.end()) {
+        if (m_lecteur.getSymbole() == "<VARIABLE>" &&
+            m_procedures.find(m_lecteur.getSymbole().getChaine()) != m_procedures.end()) {
             return instAppel();
         } else if (m_lecteur.getSymbole() == "<VARIABLE>") {
             Noeud *affect = affectation();
@@ -385,9 +390,12 @@ Noeud *Interpreteur::instTantQue() {
 }
 
 Noeud *Interpreteur::instPour() {
+    Noeud *assignation = nullptr;
     testerEtAvancer("pour");
     testerEtAvancer("(");
-    Noeud *assignation = affectation();
+    if (m_lecteur.getSymbole()=="<VARIABLE>"){
+         assignation = affectation();
+    }
     testerEtAvancer(";");
     Noeud *condition = expression();
     testerEtAvancer(";");
@@ -473,12 +481,13 @@ Noeud *Interpreteur::instSelon() {
     int i = 0;
     while (m_lecteur.getSymbole() == "cas") {
         m_lecteur.avancer();
-        try{
+        try {
             tester("<ENTIER>");
-        }catch(SyntaxeException &e){
+        } catch (SyntaxeException &e) {
             m_nbErreur++;
             m_lecteur.avancer();
-        }ind.emplace_back(m_table->chercheAjoute(m_lecteur.getSymbole()));
+        }
+        ind.emplace_back(m_table->chercheAjoute(m_lecteur.getSymbole()));
         m_lecteur.avancer();
         testerEtAvancer(":");
         instructions.emplace_back(inst());
@@ -511,7 +520,7 @@ Noeud *Interpreteur::instAppel() {
     testerEtAvancer(")");
     testerEtAvancer(";");
 
-    return new NoeudInstAppel(procedureName,procedure,arguments);
+    return new NoeudInstAppel(procedureName, procedure, arguments);
 }
 
 int Interpreteur::getNbErreur() const {

@@ -6,6 +6,7 @@ procedure principale()
  test1 = 7;
  test2 = 7;
  tantque(test1)
-    test2 = test1;
+    test1 = test1 - 1;
+
  fintantque
 finproc

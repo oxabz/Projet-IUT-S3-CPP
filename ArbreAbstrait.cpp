@@ -112,7 +112,15 @@ int NoeudOperateurBinaire::executer() {
 void NoeudOperateurBinaire::traduire(Generateur *os) {
     os->ecrire("(");
     m_operandeGauche->traduire(os);
-    os->ecrire(m_operateur.getChaine());
+    if (m_operateur == "ou"){
+        os->ecrire(" || ");
+    } else if (m_operateur == "et"){
+        os->ecrire(" && ");
+    } else if (m_operateur == "non"){
+        os->ecrire("!");
+    } else{
+        os->ecrire(" "+m_operateur.getChaine()+" ");
+    }
     m_operandeDroit->traduire(os);
     os->ecrire(")");
 }
@@ -153,9 +161,12 @@ int NoeudInstSiRiche::executer() {
 }
 
 void NoeudInstSiRiche::traduire(Generateur *os) {
-    os->ecrireLigne("if(");
+    os->ecrireLigne("if");
+    if(typeid(*m_conditions[0])== typeid(SymboleValue))
+        os->ecrire("(");
     this->m_conditions[0]->traduire(os);
-    os->ecrireLigne(")");
+    if(typeid(*m_conditions[0])== typeid(SymboleValue))
+        os->ecrire(")");
     if(typeid(*m_sequences[0])== typeid(NoeudSeqInst)){
         m_sequences[0]->traduire(os);
     }else{
@@ -165,7 +176,12 @@ void NoeudInstSiRiche::traduire(Generateur *os) {
     }
     for (int i = 1; i < this->m_conditions.size(); ++i) {
         os->ecrire("else if");
+        if(typeid(*m_conditions[i])== typeid(SymboleValue))
+            os->ecrire("(");
         this->m_conditions[i]->traduire(os);
+        if(typeid(*m_conditions[i])== typeid(SymboleValue))
+            os->ecrire(")");
+        os->ecrire("");
         if(typeid(*m_sequences[i])== typeid(NoeudSeqInst)){
             m_sequences[i]->traduire(os);
         }else{
@@ -203,7 +219,11 @@ int NoeudInstTantQue::executer() {
 
 void NoeudInstTantQue::traduire(Generateur *os) {
     os->ecrireLigne("while");
+    if(typeid(*m_condition)== typeid(SymboleValue))
+        os->ecrire("(");
     m_condition->traduire(os);
+    if(typeid(*m_condition)== typeid(SymboleValue))
+        os->ecrire(")");
     if(typeid(*m_sequence)== typeid(NoeudSeqInst)){
         m_sequence->traduire(os);
     }else{
@@ -221,7 +241,8 @@ NoeudInstPour::NoeudInstPour(Noeud *mAssignation, Noeud *mIncrementation, Noeud 
           m_sequence(mSequence) {}
 
 int NoeudInstPour::executer() {
-    m_assignation->executer();
+    if(m_assignation)
+        m_assignation->executer();
     while (m_condition->executer()){
         m_sequence->executer();
         m_incrementation->executer();
@@ -231,7 +252,8 @@ int NoeudInstPour::executer() {
 
 void NoeudInstPour::traduire(Generateur *os) {
     os->ecrireLigne("for(");
-    ((NoeudAffectAbstr*)this->m_assignation)->traduireInline(os);
+    if(this->m_assignation)
+        ((NoeudAffectAbstr*)this->m_assignation)->traduireInline(os);
     os->ecrire("; ");
     this->m_condition->traduire(os);
     os->ecrire("; ");
@@ -327,7 +349,11 @@ void NoeudInstRepeter::traduire(Generateur *os) {
     os->ecrireLigne("do");
     this->inst->traduire(os);
     os->ecrire("while");
+    if(typeid(*exp)== typeid(SymboleValue))
+        os->ecrire("(");
     this->exp->traduire(os);
+    if(typeid(*exp)== typeid(SymboleValue))
+        os->ecrire(")");
     os->ecrire(";");
 
 }

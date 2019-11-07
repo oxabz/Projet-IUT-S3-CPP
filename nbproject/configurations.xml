@@ -68,7 +68,7 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
-    <itemPath>testProgrammes/TestInc</itemPath>
+    <itemPath>testProgrammes/9b-TestInc.txt</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -138,7 +138,7 @@
       </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="testProgrammes/TestInc" ex="false" tool="3" flavor2="0">
+      <item path="testProgrammes/9b-TestInc.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/newtestclass2.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -221,7 +221,7 @@
       </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="testProgrammes/TestInc" ex="false" tool="3" flavor2="0">
+      <item path="testProgrammes/9b-TestInc.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/newtestclass2.cpp" ex="false" tool="1" flavor2="0">
       </item>

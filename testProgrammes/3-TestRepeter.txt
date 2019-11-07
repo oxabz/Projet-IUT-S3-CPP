@@ -6,6 +6,6 @@ procedure principale()
  test1 = 7;
  test2 = 7;
  repeter
-    test2 = test1;
+    test1 = test1 - 1;
  jusqua (test1==0);
 finproc

@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
             fSortie.close();
             cout << endl << "================ Transpilation completed : " << endl;
         } else{
-            cerr << interpreteur.getNbErreur() << " erreurs de syntaxe"<<endl;
+            cout << interpreteur.getNbErreur() << " erreurs de syntaxe"<<endl;
         }
     } catch (InterpreteurException & e) {
         cout << e.what() << endl;
