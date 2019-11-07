@@ -27,3 +27,13 @@ ostream & operator<<(ostream & cout, const TableSymboles & ts)
   cout << endl;
   return cout;
 }
+
+vector<SymboleValue*> TableSymboles::getVariables() {
+    vector<SymboleValue *> variables;
+    for (int i = 0; i < getTaille(); ++i) {
+        if (*m_table[i] =="<VARIABLE>"){
+            variables.push_back(m_table[i]);
+        }
+    }
+    return variables;
+}

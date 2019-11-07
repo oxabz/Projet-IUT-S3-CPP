@@ -1,11 +1,12 @@
 # Test du tantque
 # Résultat attendu :
 # test1 = 0
-# test2 = 0
+# test2 = 1
 procedure principale()
  test1 = 7;
  test2 = 7;
- repeter
-    test2 = test1;
- jusqua (test1==0);
+ tantque(test1)
+    test1 = test1 - 1;
+
+ fintantque
 finproc

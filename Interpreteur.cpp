@@ -41,22 +41,28 @@ void Interpreteur::startTranspilation() {
                 }
                 m_generateur.ecrire("){");
                 m_generateur.incNiveau();
-                if (procedure.second->getParameters().size() - procedure.second->getParameters().size() != 0) {
+                if (procedure.second->getTableSymboles()->getVariables().size() - procedure.second->getParameters().size() != 0) {
                     m_generateur.ecrireLigne("int ");
-                    for (int i = 0; i < procedure.second->getTableSymboles()->getTaille(); ++i) {
-                        if ((*procedure.second->getTableSymboles())[i] == "<VARIABLE>" && [procedure, i]() {
+                    vector<SymboleValue *> vars = procedure.second->getTableSymboles()->getVariables();
+                    auto it = vars.begin();
+                    while(it!=vars.end()){
+                        if([procedure, it]() {
                             for (int j = 0; j < procedure.second->getParameters().size(); ++j) {
-                                if ((*procedure.second->getTableSymboles())[i].getChaine() ==
+                                if ((*it)->getChaine() ==
                                     procedure.second->getParameters()[j].getChaine())
-                                    return false;
+                                    return true;
                             }
-                            return true;
-                        }()) {
-                            m_generateur.ecrire((*procedure.second->getTableSymboles())[i].getChaine());
-                            if (i < procedure.second->getTableSymboles()->getTaille() - 1 -
-                                    procedure.second->getParameters().size()) {
-                                m_generateur.ecrire(",");
-                            }
+                            return false;
+                        }()){
+                            vars.erase(it);
+                        } else{
+                            it++;
+                        }
+                    }
+                    for (int i = 0; i < vars.size(); ++i) {
+                        vars[i]->traduire(&getGenerateur());
+                        if(i < vars.size()-1){
+                            m_generateur.ecrire(",");
                         }
                     }
                     m_generateur.ecrire(";");

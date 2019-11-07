@@ -12,5 +12,5 @@ procedure principale()
     test2 = 7;
     ecrire("valeur1: ",test1);
     ecrire("valeur2: ",test2);
-    ecrire("valeur2: ",test2,"valeur1: ",test1);
+    ecrire("valeur2:\n ",test2,"valeur1: ",test1);
 finproc
