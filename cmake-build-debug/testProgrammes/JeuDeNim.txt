@@ -1,0 +1,97 @@
+#Jeu de Nim
+
+procedure dessinerPlateau(joueur,nbBaton,actionIA)
+    ecrire("\27[2J\27[0;0H");
+    ecrire("Joueur ", joueur,"\n");
+    pour(i=0;i<nbBaton+actionIA;i++)
+        si(nbBaton <= i)
+            ecrire("\27[31m");
+        finsi
+        ecrire("A  ");
+    finpour
+    ecrire("\27[39m\n");
+    pour(i=0;i<5;i++)
+        pour(j=0;j<nbBaton+actionIA;j++)
+            si(nbBaton <= j)
+                ecrire("\27[31m");
+            finsi
+            ecrire("H  ");
+        finpour
+        ecrire("\27[39m\n");
+    finpour
+    pour(i=0;i<nbBaton+actionIA;i++)
+        si(nbBaton <= i)
+            ecrire("\27[31m");
+        finsi
+        ecrire("V  ");
+    finpour
+    ecrire("\27[39m\n");
+finproc
+
+procedure choixIA(nbBaton, actionJoueur,  choix)
+    si(nbBaton<=4)
+        choix = 3;
+    sinon
+        choix = 4-actionJoueur;
+    finsi
+finproc
+
+procedure principale()
+    ecrire("Bonjour\n");
+    ecrire("Seron distribués 16 battonnets qui pourron etre retiré tour a tour par les joueur. Chaque joueur pourra retirer entre 1 et 3 batonnet par tour. Le but du jeu est d'etre le dernier à pouvoir jouer\n");
+    repeter
+        ecrire("Veuillez choisir entre une partie seul ou en versus (1 : vs | 2 : solo)\n");
+        lire(mode);
+    jusqua(mode<=2 et mode>0);
+    nbBaton = 16;
+    joueur = 2;
+    dernierChoixIa = 0;
+    dernierChoixJoueur = 0;
+    zero = 0;
+    tantque (nbBaton>0)
+        si(joueur == 1 et mode == 1)
+            joueur = 2;
+            dessinerPlateau(joueur, nbBaton, zero);
+            entre = -1;
+            repeter
+                ecrire("Saisissez le nombre de baton que vous voulez retirer\n");
+                lire(entre);
+            jusqua(entre<=3 et entre>0);
+            nbBaton -= entre;
+        sinonsi(joueur == 1 et mode == 2)
+            joueur = 2;
+            choixIA(nbBaton, dernierChoixJoueur, dernierChoixIa);
+            nbBaton -= dernierChoixIa;
+        sinon
+            joueur = 1;
+            dessinerPlateau(joueur, nbBaton, dernierChoixIa);
+            entre = -1;
+            repeter
+                ecrire("Saisissez le nombre de baton que vous voulez retirer\n");
+                lire(entre);
+            jusqua(entre<=3 et entre>0);
+            nbBaton -= entre;
+            dernierChoixJoueur = entre;
+        finsi
+    fintantque
+    dessinerPlateau(joueur, nbBaton, dernierChoixIa);
+    si(mode == 1)
+        selon(joueur)
+             cas 1:
+                 ecrire("Le joueur 1 a triomphé sur le joueur 2");
+                 stop
+             cas 2:
+                 ecrire("Le joueur 2 a battut le joueur 1");
+                 stop
+        finselon
+    sinon
+        selon(joueur)
+             cas 1:
+                 ecrire("Le joueur a battut l'IA");
+                 stop
+             cas 2:
+                 ecrire("L'IA a battut le joueur");
+                 stop
+        finselon
+    finsi
+finproc
